@@ -18,7 +18,7 @@ var url = nconf.get('database:localUrl');
 if (process.env.OPENSHIFT_MONGODB_DB_URL) {
     /*url = process.env.OPENSHIFT_MONGODB_DB_URL +
     process.env.OPENSHIFT_APP_NAME;*/
-    url = process.env.OPENSHIFT_MONGODB_DB_URL;
+    url = process.env.OPENSHIFT_MONGODB_DB_URL + "nodejs";
 }
 
 console.log(url);
