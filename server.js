@@ -28,7 +28,7 @@ connect();
 
 app.use('/api', require('./api'));
 
-app.get('/', function(req, res) {
+app.get('/logins', function(req, res) {
     
     Login.find().exec(function(err, results) {
             res.json(results);
@@ -36,6 +36,15 @@ app.get('/', function(req, res) {
 
 
 
+});
+
+app.get('/', function(req, res) {
+	req.on('data', function (chunk) {		
+	});
+	req.on('end', function () {
+		res.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
+		res.end();
+	});
 });
 
 
