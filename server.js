@@ -20,6 +20,7 @@ if (process.env.OPENSHIFT_MONGODB_DB_URL) {
     process.env.OPENSHIFT_APP_NAME;
 }
 
+console.log(url);
 // Connect to mongodb
 var connect = function () {
     mongoose.connect(url);
@@ -38,14 +39,7 @@ app.get('/logins', function(req, res) {
 
 });
 
-app.get('/', function(req, res) {
-	req.on('data', function (chunk) {		
-	});
-	req.on('end', function () {
-		res.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
-		res.end();
-	});
-});
+
 
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || nconf.get('database:host');
