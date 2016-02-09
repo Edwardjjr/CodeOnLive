@@ -40,9 +40,12 @@ var loginSchema = new Schema({
 	}
 });
 
+
+
 // the schema is useless so far
 // we need to create a model using it
 var Login = mongoose.model('Logins', loginSchema);
 
 // make this available to our users in our Node applications
 module.exports = Login;
+

@@ -6,7 +6,6 @@ var apSchema = new Schema(
 	name: String,
 	org_id: String,
 	venue_id:String,
-	ap_id:String,
 	active: Boolean
 });
 

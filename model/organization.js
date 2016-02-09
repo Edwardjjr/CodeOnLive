@@ -7,6 +7,8 @@ var OrganizationSchema = new Schema(
 	active: Boolean
 });
 
+
+
 // the schema is useless so far
 // we need to create a model using it
 
