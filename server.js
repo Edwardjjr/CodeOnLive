@@ -18,14 +18,14 @@ app.get('/', function(req, res) {
 	});
 });
 
-app.use('/api/v1_1',function(req,res,next){
+/*app.use('/api/v1_1',function(req,res,next){
 	req.on('data', function (chunk) {
 		var jsonBody = JSON.parse(chunk);
 		Binnacle.RegisterLogin(jsonBody);
 	});
 	next();
 
-});
+});*/
 
 var url = nconf.get('database:localUrl');
 if (process.env.OPENSHIFT_MONGODB_DB_URL) {
