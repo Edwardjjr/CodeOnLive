@@ -48,7 +48,7 @@ app.use('/api', require('./api'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || nconf.get('database:host');
 var port = process.env.OPENSHIFT_NODEJS_PORT || nconf.get('database:port');
 app.listen( port, ipaddress, function() {
-    console.log((new Date()) + ' Server is listening on port '+port);
+    console.log((new Date()) + ' Server is listening on port '+port 'host'+ ipaddress);
 });
 
 
