@@ -4,6 +4,8 @@ var app = module.exports = express();
 var Login = require('../../../model/loginV1_1');
 var Ap = require('../../../model/ap');
 var User = require('../../../model/userV1_1');
+var Binnacle = require('../binnacle/index.js');
+var Papertrail = require('../papertrail/index.js');
 
 app.post('/', function(req, res) {
 	req.on('data', function (chunk) {
@@ -64,7 +66,8 @@ var registerUser = function(jsonBody)
 						});
 						user.save(function(err) {
 						  if (err) throw err;
-
+						  Papertrail.SendMessage('Create user '+jsonBody[counterUser]["client"]["id"]);
+						  Binnacle.CreateUser(user,"success");
 						  console.log('user saved successfully!');
 						});
 					});
@@ -124,7 +127,8 @@ var registerLogin = function(jsonBody)
 				});
 				login.save(function(err) {
 				  if (err) throw err;
-
+				  Binnacle.UpdateLogin(jsonBody[counterLogin]["id"],"success");
+				  Papertrail.SendMessage('Process Login '+jsonBody[counterLogin]["id"]);
 				  console.log('Login saved successfully!');
 				});
 			}
