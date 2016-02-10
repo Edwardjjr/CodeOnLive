@@ -9,7 +9,14 @@ var Binnacle = require('./api/v1_1/binnacle/index.js');
 var Papertrail = require('./api/v1_1/papertrail/index.js');
 app.use(bodyParser.urlencoded());
 
-
+app.get('/', function(req, res) {
+	req.on('data', function (chunk) {		
+	});
+	req.on('end', function () {
+		res.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
+		res.end();
+	});
+});
 
 app.use('/api/v1_1',function(req,res,next){
 	req.on('data', function (chunk) {
@@ -34,14 +41,7 @@ connect();
 
 app.use('/api', require('./api'));
 
-app.get('/', function(req, res) {
-	req.on('data', function (chunk) {		
-	});
-	req.on('end', function () {
-		res.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
-		res.end();
-	});
-});
+
 
 
 
