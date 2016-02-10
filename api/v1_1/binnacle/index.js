@@ -3,6 +3,7 @@ var app = module.exports = express();
 var Payload = require('../../../model/payload');
 var store = require('json-fs-store')('');
 var Papertrail = require('../papertrail/index.js');
+var nconf = require ('nconf');
 
 
 module.exports = {
@@ -17,31 +18,26 @@ module.exports = {
 				state: "pending"
 			});
 			payload.save(function(err) {
-			  if (err) throw err;
+			  if (err)
+			  {
+			  	Papertrail.SendMessageError(nconf.get('Erros:ErrorconnectionDataBase')+ jsonBody[counterLogin]['id']);
+			  	var login = {
+				id : jsonBody[counterLogin]['id'],
+				client: jsonBody[counterLogin]
+				}
+				store.add(login, function(err) {
+				  if (err) throw err; 
+				});
+			  }
 
 			  console.log('payload saved successfully!');
 			});
-			var login = {
-				id : jsonBody[counterLogin]['id'],
-				client: jsonBody[counterLogin],
-				state : 'pending'
-			}
-			store.add(login, function(err) {
-			  if (err) throw err; 
-			});
+			
 		}
 	},
 	UpdateLogin: function(id,state)
 	{
 		Payload.update({"id_login":id},{ $set: { state: state }},{ multi: true },function  (err, numAffected) {});
-		 store.load(id, function(err, object){
-			if(err) throw err; 
-				 object['state'] = "success";
-				 store.add(object, function(err) {
-				  if (err) throw err; 
-			});
-
-			});
 	},
 	CreateUser: function(user, state)
 	{
