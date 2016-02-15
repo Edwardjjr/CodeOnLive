@@ -1,0 +1,11 @@
+{
+  "database": {
+    "host": "127.0.0.1",
+    "port": 8080,
+    "localUrl": "mongodb://localhost/test2"
+  },
+  "Errors":
+  {
+  	"ErrorconnectionDataBase": "Error:01 :"
+  }
+}
