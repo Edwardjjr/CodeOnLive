@@ -5,7 +5,7 @@ var nconf = require ('nconf');
 nconf.argv()
 .env().file({ file: './config.json' });
 var mongoose = require('mongoose');
-var Binnacle = require('./api/v1_1/binnacle/index.js');
+var Binnacle = require('./tanaza-connector/v1_1/log/index.js');
 
 app.use(bodyParser.urlencoded());
 
@@ -19,7 +19,7 @@ app.get('/', function(req, res) {
 });
 
 
-app.use('/api/v1_1',function(req,res,next){
+app.use('/tanaza-connector/v1_1',function(req,res,next){
 	req.on('data', function (chunk) {
 		var jsonBody = JSON.parse(chunk);
 		Binnacle.RegisterLogin(jsonBody);
@@ -40,7 +40,7 @@ var connect = function () {
 };
 connect();
 
-app.use('/api', require('./api'));
+app.use('/tanaza-connector', require('./tanaza-connector'));
 
 
 
