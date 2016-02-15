@@ -1,6 +1,6 @@
 var express = require('express');
 var app = module.exports = express();
-var Payload = require('../../../model/payload');
+var Payload = require('../../model/payload');
 var store = require('json-fs-store')('');
 var OnLiveLogger = require('../onLiveLogger/index.js');
 var nconf = require ('nconf');

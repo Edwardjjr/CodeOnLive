@@ -5,8 +5,8 @@ var app = module.exports = express();
 var Login = require('../../model/loginV1_1');
 var Ap = require('../../model/ap');
 var User = require('../../model/userV1_1');
-var log = require('./log/index.js');
-var OnLiveLogger = require('./onLiveLogger/index.js');
+var OnLiveLogger = require('../../common/onLiveLogger/index.js');
+var Log = require('../../common/log/index.js');
 
 app.get('/', function(req, res) {
 	req.on('data', function (chunk) {		
@@ -19,17 +19,15 @@ app.get('/', function(req, res) {
 
 app.post('/', function(req, res) {
 	req.on('data', function (chunk) {
-		var jsonBody = JSON.parse(chunk);
-		console.log("V1_1");
-		console.log(jsonBody);
 		try
 		{
-			registerUser(jsonBody);
-			registerLogin(jsonBody);
+			var jsonBody = JSON.parse(chunk);
 		}
 		catch (ex) {
 		    console.log(ex);
-		}	
+		}
+		registerUser(jsonBody);
+		registerLogin(jsonBody);	
 	});
 	req.on('end', function () {
 		res.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
@@ -77,7 +75,7 @@ var registerUser = function(jsonBody)
 						user.save(function(err) {
 						  if (err) throw err;
 						  OnLiveLogger.SendMessage('Create user '+jsonBody[counterUser]["client"]["id"]);
-						  log.CreateUser(user,"success");
+						  Log.CreateUser(user,"success");
 						  console.log('user saved successfully!');
 						});
 					});
@@ -137,7 +135,7 @@ var registerLogin = function(jsonBody)
 				});
 				login.save(function(err) {
 				  if (err) throw err;
-				  log.UpdateLogin(jsonBody[counterLogin]["id"],"success");
+				  Log.UpdateLogin(jsonBody[counterLogin]["id"],"success");
 				  OnLiveLogger.SendMessage('Process Login '+jsonBody[counterLogin]["id"]);
 				  console.log('Login saved successfully!');
 				});

@@ -5,7 +5,6 @@ var nconf = require ('nconf');
 nconf.argv()
 .env().file({ file: './config.json' });
 var mongoose = require('mongoose');
-var Log = require('./tanaza-connector/v1_1/log/index.js');
 
 app.use(bodyParser.urlencoded());
 
@@ -19,14 +18,7 @@ app.get('/', function(req, res) {
 });
 
 
-app.use('/tanaza-connector/v1_1',function(req,res,next){
-	req.on('data', function (chunk) {
-		var jsonBody = JSON.parse(chunk);
-		Log.RegisterLogin(jsonBody);
-	});
-	next();
 
-});
 
 var url = nconf.get('database:localUrl');
 if (process.env.OPENSHIFT_MONGODB_DB_URL) {
