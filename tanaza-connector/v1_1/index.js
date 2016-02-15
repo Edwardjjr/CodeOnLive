@@ -6,7 +6,7 @@ var Login = require('../../model/loginV1_1');
 var Ap = require('../../model/ap');
 var User = require('../../model/userV1_1');
 var log = require('./log/index.js');
-var OnLiveLogger = require('./OnLiveLogger/index.js');
+var OnLiveLogger = require('./onLiveLogger/index.js');
 
 app.get('/', function(req, res) {
 	req.on('data', function (chunk) {		
