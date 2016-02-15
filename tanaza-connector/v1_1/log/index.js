@@ -2,7 +2,7 @@ var express = require('express');
 var app = module.exports = express();
 var Payload = require('../../../model/payload');
 var store = require('json-fs-store')('');
-var Papertrail = require('../papertrail/index.js');
+var OnLiveLogger = require('../OnLiveLogger/index.js');
 var nconf = require ('nconf');
 
 
@@ -10,7 +10,7 @@ module.exports = {
 	RegisterLogin: function(jsonBody)
 	{
 		for (counterLogin in jsonBody) {
-			Papertrail.SendMessage('recevid login '+ jsonBody[counterLogin]['id']);
+			OnLiveLogger.SendMessage('recevid login '+ jsonBody[counterLogin]['id']);
 			var payload = new Payload(
 			{
 				id_login:jsonBody[counterLogin]['id'],
@@ -20,7 +20,7 @@ module.exports = {
 			payload.save(function(err) {
 			  if (err)
 			  {
-			  	Papertrail.SendMessageError(nconf.get('Erros:ErrorconnectionDataBase')+ jsonBody[counterLogin]['id']);
+			  	OnLiveLogger.SendMessageError(nconf.get('Erros:ErrorconnectionDataBase')+ jsonBody[counterLogin]['id']);
 			  	var login = {
 				id : jsonBody[counterLogin]['id'],
 				client: jsonBody[counterLogin]

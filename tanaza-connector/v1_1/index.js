@@ -6,7 +6,16 @@ var Login = require('../../model/loginV1_1');
 var Ap = require('../../model/ap');
 var User = require('../../model/userV1_1');
 var log = require('./log/index.js');
-var Papertrail = require('./papertrail/index.js');
+var OnLiveLogger = require('./OnLiveLogger/index.js');
+
+app.get('/', function(req, res) {
+	req.on('data', function (chunk) {		
+	});
+	req.on('end', function () {
+		res.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
+		res.end();
+	});
+});
 
 app.post('/', function(req, res) {
 	req.on('data', function (chunk) {
@@ -67,7 +76,7 @@ var registerUser = function(jsonBody)
 						});
 						user.save(function(err) {
 						  if (err) throw err;
-						  Papertrail.SendMessage('Create user '+jsonBody[counterUser]["client"]["id"]);
+						  OnLiveLogger.SendMessage('Create user '+jsonBody[counterUser]["client"]["id"]);
 						  log.CreateUser(user,"success");
 						  console.log('user saved successfully!');
 						});
@@ -129,7 +138,7 @@ var registerLogin = function(jsonBody)
 				login.save(function(err) {
 				  if (err) throw err;
 				  log.UpdateLogin(jsonBody[counterLogin]["id"],"success");
-				  Papertrail.SendMessage('Process Login '+jsonBody[counterLogin]["id"]);
+				  OnLiveLogger.SendMessage('Process Login '+jsonBody[counterLogin]["id"]);
 				  console.log('Login saved successfully!');
 				});
 			}
