@@ -4,8 +4,12 @@
     "port": 8080,
     "localUrl": "mongodb://localhost/test2"
   },
-  "Errors":
+  "ConfiOnLiveLoggerConnector":
   {
-  	"ErrorconnectionDataBase": "Error:01 :"
+  	"host": "logs3.papertrailapp.com",
+  	"port": 23794,
+  	"program": "tanaza-connector",
+  	"level": "debug",
+  	"file": "all-logs.log"
   }
 }

@@ -1,145 +1,177 @@
-var express = require('express');
-var app = module.exports = express();
+/*----------------------------------------------------------------------
+Dependencias:
+Las mismas puede ser de archivos externos o de archivos propios de la 
+inclementacion.
+Externos: Sus nombres se trabajan con un E_.
+Internos: Sus nombres se trabajan con una I_
+Modelo de base de datos: Sus nombres se trabajan con una M_
+-----------------------------------------------------------------------*/
 
+var E_Express = require('express');
+var E_App = module.exports = E_Express();
+var M_Login = require('../../model/loginV1_1');
+var M_Ap = require('../../model/ap');
+var M_User = require('../../model/userV1_1');
+var I_OnLiveLogger = require('../../common/onLiveLogger/index.js');
+var I_LogDataBase = require('../../common/logDataBase/index.js');
 
-var Login = require('../../model/loginV1_1');
-var Ap = require('../../model/ap');
-var User = require('../../model/userV1_1');
-var OnLiveLogger = require('../../common/onLiveLogger/index.js');
-var Log = require('../../common/log/index.js');
+/*----------------------------------------------------------------------
+Paramteros: pReq: el request enviado.
+			pRres: el response.
 
-app.get('/', function(req, res) {
-	req.on('data', function (chunk) {		
+Decripcion:
+Este metodo se encarag de enviar un mensaje de OK al servicio que busca 
+consumirlo..
+-----------------------------------------------------------------------*/
+
+E_App.get('/', function(pReq, pRes) {
+	pReq.on('data', function (chunk) {		
 	});
-	req.on('end', function () {
-		res.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
-		res.end();
+	pReq.on('end', function () {
+		pRes.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
+		pRes.end();
 	});
 });
 
-app.post('/', function(req, res) {
-	req.on('data', function (chunk) {
+/*----------------------------------------------------------------------
+Paramteros: pJsonBody: El request repostado por tanaza.
+
+Decripcion:
+Se tiene procesa el request, el mismo es insertado en la cola de logins por
+procesar con un estado de pendiente, si el mismo llega a se procesado con
+exito su estado cambia a success.
+Nota: Se verifica que no se den errores de paseo, se envia informacion 
+a OnLivelogger con el fin de reportar las acciones del programa.
+-----------------------------------------------------------------------*/
+
+E_App.post('/', function(pReq, pRes) {
+	pReq.on('data', function (pChunk) {
 		try
 		{
-			var jsonBody = JSON.parse(chunk);
+			var _jsonBody = JSON.parse(pChunk);
+			I_LogDataBase.RegisterLogin(_jsonBody);
+		
+		
 		}
 		catch (ex) {
-		    console.log(ex);
+		    I_OnLiveLogger.SendMessage('Error al parsear el json recibido del api de tanaza: '+ err, "error");
 		}
-		registerUser(jsonBody);
-		registerLogin(jsonBody);	
+		registerLogin(_jsonBody);
+
 	});
-	req.on('end', function () {
-		res.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
-		res.end();
+	pReq.on('end', function () {
+		pRes.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
+		pRes.end();
 	});
 });
 
 
-var registerUser = function(jsonBody)
-{
-	var counterUser;
-	var org_id="";
-	var venue_id="";
-	var ap_id = "";
-	for (counterUser in jsonBody) {
 
-		User.findOne({id:jsonBody[counterUser]["client"]["id"]}).exec(function(err,results){
+
+/*----------------------------------------------------------------------
+Paramteros: pJsonBody: es un arreglo en formato json con que contiene 
+logins reportado por tanaza.
+
+Decripcion:
+Este metodo tiene con funcion registrar cada uno de los login asi como
+verificar si el usuario registrado por este login ya se encuentra en la
+base de datos de no se asi se agrega un usuario nuevo.
+-----------------------------------------------------------------------*/
+
+var registerLogin = function(pJsonBody)
+{
+	var _counterLogin;
+	var _org_id="";
+	var _venue_id="";
+	var _ap_id = "";
+	for (_counterLogin in pJsonBody) {
+		M_Ap.findOne({ap_id:pJsonBody[_counterLogin]["ap_id"]}).exec(function(err, results) {
 			if(err)
 			{
-				console.log(err);
-			}
-			else
-			{
-				if (results == null)
-				{
-					Ap.findOne({ap_id:jsonBody[counterUser]["ap_id"]}).exec(function(err, results) {
-						if(results != null)
-						{
-				        	org_id =results.org_id;
-				        	venue_id = results.venue_id;
-				        	ap_id = results._id;
-				        }
-
-						var user = new User({
-							id:jsonBody[counterUser]["client"]["id"],
-							first_name:jsonBody[counterUser]["client"]["first_name"],
-							last_name:jsonBody[counterUser]["client"]["last_name"],
-							picture:jsonBody[counterUser]["client"]["picture"],
-							gender:jsonBody[counterUser]["client"]["gender"],
-							email:jsonBody[counterUser]["client"]["email"],
-							phone:jsonBody[counterUser]["client"]["phone"],
-							birthday:jsonBody[counterUser]["client"]["birthday"],
-							logins_count:jsonBody[counterUser]["client"]["logins_count"]
-						});
-						user.save(function(err) {
-						  if (err) throw err;
-						  OnLiveLogger.SendMessage('Create user '+jsonBody[counterUser]["client"]["id"]);
-						  Log.CreateUser(user,"success");
-						  console.log('user saved successfully!');
-						});
-					});
-				}
-			}
-		});	
-		
-			
-		}
-}
-
-var registerLogin = function(jsonBody)
-{
-	var counterLogin;
-	var org_id="";
-	var venue_id="";
-	var ap_id = "";
-	for (counterLogin in jsonBody) {
-		Ap.findOne({ap_id:jsonBody[counterLogin]["ap_id"]}).exec(function(err, results) {
-			if(err)
-			{
-				console.log(err);
+				I_OnLiveLogger.SendMessage('Se genero un error DataBase: '+err, "warn");
 			}
 			else
 			{
 				if(results != null)
 				{
-		        	org_id =results.org_id;
-		        	venue_id = results.venue_id;
-		        	ap_id = results._id;
+		        	_org_id =results.org_id;
+		        	_venue_id = results.venue_id;
+		        	_ap_id = results._id;
 		        }
-			
-				var login = new Login({
-				id:jsonBody[counterLogin]["id"],
-				ap_id:jsonBody[counterLogin]["ap_id"],
-				ssid: jsonBody[counterLogin]["ssid"],
-				ip_address:jsonBody[counterLogin]["ip_address"],
-				mac_address:jsonBody[counterLogin]["mac_address"],
-				auth_method: jsonBody[counterLogin]["auth_method"],
-				roaming: jsonBody[counterLogin]["roaming"],
-				created_at:jsonBody[counterLogin]["created_at"],
-				org_id_OnLive:org_id,
-				venue_id_OnLive:venue_id,
-				ap_id_OnLive:ap_id,
-					client:
-					{
-						id:jsonBody[counterLogin]["client"]["id"],
-						first_name:jsonBody[counterLogin]["client"]["first_name"],
-						last_name:jsonBody[counterLogin]["client"]["last_name"],
-						picture:jsonBody[counterLogin]["client"]["picture"],
-						gender:jsonBody[counterLogin]["client"]["gender"],
-						email:jsonBody[counterLogin]["client"]["email"],
-						phone:jsonBody[counterLogin]["client"]["phone"],
-						birthday:jsonBody[counterLogin]["client"]["birthday"],
-						logins_count:jsonBody[counterLogin]["client"]["logins_count"]
+		        else
+		        {
+		        	I_OnLiveLogger.SendMessage('Se recive datos de un Ap no registrado'+pJsonBody[_counterLogin]["ap_id"], "warn");
+		        }
+		        M_User.findOne({id:pJsonBody[_counterLogin]["client"]["id"]}).exec(function(err,results)
+		        {
+			        if(results == null)
+			        {
+
+						var _user = new M_User({
+							id:pJsonBody[_counterLogin]["client"]["id"],
+							first_name:pJsonBody[_counterLogin]["client"]["first_name"],
+							last_name:pJsonBody[_counterLogin]["client"]["last_name"],
+							picture:pJsonBody[_counterLogin]["client"]["picture"],
+							gender:pJsonBody[_counterLogin]["client"]["gender"],
+							email:pJsonBody[_counterLogin]["client"]["email"],
+							phone:pJsonBody[_counterLogin]["client"]["phone"],
+							birthday:pJsonBody[_counterLogin]["client"]["birthday"],
+							logins_count:pJsonBody[_counterLogin]["client"]["logins_count"],
+							org_id_OnLive:_org_id
+						});
+						_user.save(function(err) {
+							if (err)
+							{
+								I_OnLiveLogger.SendMessage('Se recibe datos de un user no registrado'+pJsonBody[_counterLogin]["client"]["id"], "warn");
+							}
+							else
+							{
+								I_OnLiveLogger.SendMessage('Create user '+pJsonBody[_counterLogin]["client"]["id"], 'info');
+							}
+						});
 					}
+
+					var _login = new M_Login({
+					id:pJsonBody[_counterLogin]["id"],
+					ap_id:pJsonBody[_counterLogin]["ap_id"],
+					ssid: pJsonBody[_counterLogin]["ssid"],
+					ip_address:pJsonBody[_counterLogin]["ip_address"],
+					mac_address:pJsonBody[_counterLogin]["mac_address"],
+					auth_method: pJsonBody[_counterLogin]["auth_method"],
+					roaming: pJsonBody[_counterLogin]["roaming"],
+					created_at:pJsonBody[_counterLogin]["created_at"],
+					org_id_OnLive:_org_id,
+					venue_id_OnLive:_venue_id,
+					ap_id_OnLive:_ap_id,
+						client:
+						{
+							id:pJsonBody[_counterLogin]["client"]["id"],
+							first_name:pJsonBody[_counterLogin]["client"]["first_name"],
+							last_name:pJsonBody[_counterLogin]["client"]["last_name"],
+							picture:pJsonBody[_counterLogin]["client"]["picture"],
+							gender:pJsonBody[_counterLogin]["client"]["gender"],
+							email:pJsonBody[_counterLogin]["client"]["email"],
+							phone:pJsonBody[_counterLogin]["client"]["phone"],
+							birthday:pJsonBody[_counterLogin]["client"]["birthday"],
+							logins_count:pJsonBody[_counterLogin]["client"]["logins_count"]
+						}
+					});
+					
+					_login.save(function(err) {
+						if (err)
+						{
+							I_OnLiveLogger.SendMessage('Se recibe datos de un login no registrado'+pJsonBody[_counterLogin]["id"], "warn");
+						}
+						else
+						{
+							I_OnLiveLogger.SendMessage('Create Login '+pJsonBody[_counterLogin]["id"], 'info');
+						}
+					 
+					});
 				});
-				login.save(function(err) {
-				  if (err) throw err;
-				  Log.UpdateLogin(jsonBody[counterLogin]["id"],"success");
-				  OnLiveLogger.SendMessage('Process Login '+jsonBody[counterLogin]["id"]);
-				  console.log('Login saved successfully!');
-				});
+
 			}
 		});
 	}
+
 }

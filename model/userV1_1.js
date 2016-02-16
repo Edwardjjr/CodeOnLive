@@ -12,7 +12,8 @@ var userSchema = new Schema({
 		email:String,
 		phone:String,
 		birthday:Date,
-		logins_count:Number
+		logins_count:Number,
+		org_id_OnLive: String
 });
 
 
