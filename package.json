@@ -23,9 +23,11 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.2",
     "express": "^3.21.2",
     "json-fs-store": "^1.0.0",
+    "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.2",
     "nconf": "^0.8.4",
     "sync": "^0.2.5",
