@@ -83,7 +83,10 @@ var registerLogin = function(pJsonBody)
 	var _org_id="";
 	var _venue_id="";
 	var _ap_id = "";
+	var _count = 0;
 	for (_counterLogin in pJsonBody) {
+		_count++;
+
 		M_Ap.findOne({ap_id:pJsonBody[_counterLogin]["ap_id"]}).exec(function(err, results) {
 			if(err)
 			{
@@ -164,6 +167,10 @@ var registerLogin = function(pJsonBody)
 						else
 						{
 							I_OnLiveLogger.SendMessage('Create Login '+pJsonBody[_counterLogin]["id"], 'info');
+							if(_count == Object.keys(pJsonBody).length)
+						  	{
+						  		I_LogDataBase.UpdateLogin(pJsonBody[0]["id"],'success');
+						  	}
 						}
 					 
 					});
@@ -171,6 +178,7 @@ var registerLogin = function(pJsonBody)
 
 			}
 		});
+		
 	}
 
 }

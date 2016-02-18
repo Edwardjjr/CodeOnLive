@@ -25,32 +25,40 @@ module.exports = {
 	pondentes.
 	El id que identifica este paquete es el id del primer login del arreglo.
 	-----------------------------------------------------------------------*/
-	RegisterLogin: function(pJsonBody)
+	RegisterLogin: function(pJsonBody, registerLogin)
 	{
-		for (counterLogin in pJsonBody) {
-			I_OnLiveLogger.SendMessage('recevid login '+ pJsonBody[counterLogin]['id']);
-			
-			var payload = new M_Payload(
+		I_OnLiveLogger.SendMessage('recevid login: '+ pJsonBody[0]['id'], 'info');
+		var payload = new M_Payload(
+		{
+			id_login:pJsonBody[0]['id'],
+			body: JSON.stringify(pJsonBody),
+			state: "pending"
+		});
+		payload.save(function(err) {
+			if (err)
 			{
-				id_login:pJsonBody[counterLogin]['id'],
-				body: JSON.stringify(pJsonBody[counterLogin]),
-				state: "pending"
-			});
-			payload.save(function(err) {
-			  if (err)
-			  {
-			  	I_OnLiveLogger.SendMessage( 'No se proceso el paquete:' + pJsonBody[0]['id'], 'error');
-			  	var login = {
-				id : pJsonBody[counterLogin]['id'],
-				client: pJsonBody[counterLogin]
+				I_OnLiveLogger.SendMessage( 'No se proceso el paquete:' + pJsonBody[0]['id'], 'error');
+				var login = {
+				id : pJsonBody[0]['id'],
+				client: pJsonBody
 				}
 				E_Store.add(login, function(err) {
-				  if (err) throw err; 
+				  if (err) 
+				  {
+				  	I_OnLiveLogger.SendMessage( 'Error al salver en archivo:' + pJsonBody[0]['id'], 'error');
+				  }
+				  else
+				  {
+				  	I_OnLiveLogger.SendMessage( 'Creo archivo:' + pJsonBody[0]['id'], 'info');
+				  }
 				});
-			  }
-			});
-			
-		}
+			}
+			else
+			{
+				registerLogin(pJsonBody);
+			}
+		});
+		
 	},
 	/*----------------------------------------------------------------------
 	Paramteros: pId: Identificador del paquete.
@@ -61,6 +69,8 @@ module.exports = {
 	-----------------------------------------------------------------------*/
 	UpdateLogin: function(pId,pState)
 	{
-		M_Payload.update({"id_login":pId},{ $set: { state: pState }},{ multi: true },function  (err, numAffected) {});
+		M_Payload.update({"id_login":pId},{ $set: { state: pState }},{ multi: true },function  (err, numAffected) {
+			I_OnLiveLogger.SendMessage( 'Proccess Login: ' + pId, 'info');
+		});
 	}
 };
