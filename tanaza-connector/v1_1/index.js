@@ -49,14 +49,13 @@ E_App.post('/', function(pReq, pRes) {
 		try
 		{
 			var _jsonBody = JSON.parse(pChunk);
-			I_LogDataBase.RegisterLogin(_jsonBody);
+			I_LogDataBase.RegisterLogin(_jsonBody,registerLogin);
 		
 		
 		}
 		catch (ex) {
 		    I_OnLiveLogger.SendMessage('Error al parsear el json recibido del api de tanaza: '+ err, "error");
 		}
-		registerLogin(_jsonBody);
 
 	});
 	pReq.on('end', function () {
