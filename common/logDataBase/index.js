@@ -55,7 +55,6 @@ module.exports = {
 			}
 			else
 			{
-				console.log("entro");
 				registerLogin(pJsonBody);
 			}
 		});
