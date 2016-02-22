@@ -56,9 +56,14 @@ E_App.post('/', function(pReq, pRes) {
 		
 		}
 		catch (ex) {
+<<<<<<< HEAD
 			//Se modifico por las versiones de parseo.
 			I_Parser.registerLogin(_jsonBody);
 		    //I_OnLiveLogger.SendMessage('Error al parsear el json recibido del api de tanaza: '+ err, "error");
+=======
+			
+		    I_OnLiveLogger.SendMessage('Error al parsear el json recibido del api de tanaza: '+ err, "error");
+>>>>>>> origin/master
 		}
 
 	});
