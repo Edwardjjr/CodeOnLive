@@ -54,6 +54,7 @@ E_App.post('/', function(pReq, pRes) {
 		
 		}
 		catch (ex) {
+			
 		    I_OnLiveLogger.SendMessage('Error al parsear el json recibido del api de tanaza: '+ err, "error");
 		}
 
