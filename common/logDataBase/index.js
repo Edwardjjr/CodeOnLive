@@ -25,31 +25,31 @@ module.exports = {
 	pondentes.
 	El id que identifica este paquete es el id del primer login del arreglo.
 	-----------------------------------------------------------------------*/
-	RegisterLogin: function(pJsonBody, registerLogin)
+	RegisterLogin: function(pJsonBody, registerLogin,pId)
 	{
-		I_OnLiveLogger.SendMessage('recevid login: '+ pJsonBody[0]['id'], 'info');
+		I_OnLiveLogger.SendMessage('recevid login: '+ pId, 'info');
 		var payload = new M_Payload(
 		{
-			id_login:pJsonBody[0]['id'],
+			id_login:pId,
 			body: JSON.stringify(pJsonBody),
 			state: "pending"
 		});
 		payload.save(function(err) {
 			if (err)
 			{
-				I_OnLiveLogger.SendMessage( 'No se proceso el paquete:' + pJsonBody[0]['id'], 'error');
+				I_OnLiveLogger.SendMessage( 'No se proceso el paquete:' + pId, 'error');
 				var login = {
-				id : pJsonBody[0]['id'],
+				id : pId,
 				client: pJsonBody
 				}
 				E_Store.add(login, function(err) {
 				  if (err) 
 				  {
-				  	I_OnLiveLogger.SendMessage( 'Error al salver en archivo:' + pJsonBody[0]['id'], 'error');
+				  	I_OnLiveLogger.SendMessage( 'Error al salver en archivo:' + pId, 'error');
 				  }
 				  else
 				  {
-				  	I_OnLiveLogger.SendMessage( 'Creo archivo:' + pJsonBody[0]['id'], 'info');
+				  	I_OnLiveLogger.SendMessage( 'Creo archivo:' + pId, 'info');
 				  }
 				});
 			}

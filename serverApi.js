@@ -16,6 +16,7 @@ E_Nconf.argv()
 var E_mongoose = require('mongoose');
 var E_Jwt = require('jsonwebtoken');
 var I_Client = require('./api/v1/client/index.js');
+var I_OnLiveLogger = require('./common/onLiveLogger/index.js');
 
 
 /*----------------------------------------------------------------------
@@ -40,7 +41,7 @@ dañar el codigo.
 E_App.use('/',function(pReq, pRes, pNext) { 
   pRes.header('Access-Control-Allow-Origin', "*"); 
   pRes.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE'); 
-  pRes.header('Access-Control-Allow-Headers', 'Content-Type'); 
+  //pRes.header('Access-Control-Allow-Headers', 'Content-Type'); 
   pNext();
 })
 
@@ -54,9 +55,19 @@ Metodo de prueba para ver como tomar el token recibido paar verificar la
 autorizacion del usuraio.
 -----------------------------------------------------------------------*/
 
-/*E_App.use('/api/v1',function(pReq, pRes) {
-  console.log(pReq.headers);
-})*/
+E_App.use('/api',function(pReq, pRes,pNext) {
+    E_Jwt.verify(pReq.headers['accept'], 'prueba', function(err, decoded) {
+      if(err)
+      {
+        I_OnLiveLogger.SendMessage('Error de token:'+ err, 'info');
+        return pRes.status(500).send("Token expires");
+      }
+      else
+      {
+        pNext();
+      }
+    });
+});
 
 /*----------------------------------------------------------------------
 Decripcion:
@@ -73,7 +84,7 @@ Decripcion:
 El metodo crea un jsonwebtoken para el usario especificado.
 -----------------------------------------------------------------------*/
 function createToken(pUser) {
-  return E_Jwt.sign(pUser, 'prueba', { expiresIn: '20s' });
+  return E_Jwt.sign(pUser, 'prueba', { expiresIn: '5m' });
 }
 
 
@@ -102,7 +113,7 @@ connect();
 E_App.get('/', function(pReq, pRes) {
 	pReq.on('data', function (chunk) {
 	});
-	req.on('end', function () {
+	preq.on('end', function () {
 		pRes.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
 		pRes.end();
 	});

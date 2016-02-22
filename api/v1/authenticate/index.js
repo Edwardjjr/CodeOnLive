@@ -1,6 +1,6 @@
-var express = require('express');
-var app = module.exports = express();
+var E_Jwt = require('jsonwebtoken');
 
 
 module.exports = {
+	
 };

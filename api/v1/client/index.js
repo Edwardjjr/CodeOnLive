@@ -63,17 +63,19 @@ module.exports = {
 	-----------------------------------------------------------------------*/
 	compareClient:function(pEmail,pPassword,pCallback)
 	{
+
 		M_Client.findOne({email:pEmail}).exec(function(err,result)
 		{
+			
 			if (result != null)
 			{	
 				E_Bcrypt.compare(pPassword, result.password, function(err, res) {
-					callback(res,result);
+					pCallback(res,result);
 				});
 			}
 			else
 			{
-				pCallback(res);
+				pCallback(null,null);
 			}
 		});
 		
