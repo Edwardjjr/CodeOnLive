@@ -5,6 +5,19 @@ var nconf = require ('nconf');
 nconf.argv()
 .env().file({ file: './config.json' });
 var mongoose = require('mongoose');
+var CronJob = require('cron').CronJob;
+var I_Cron = require('./cron/index.js');
+
+
+var job = new CronJob({
+  cronTime: "00 30 00 * * *",
+  onTick: function() {
+    I_Cron.processQueuePending();
+  },
+  start: false
+});
+job.start();
+
 
 app.use(bodyParser.urlencoded());
 
@@ -38,8 +51,8 @@ app.use('/tanaza-connector', require('./tanaza-connector'));
 
 
 
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP || nconf.get('database:host');
-var port = process.env.OPENSHIFT_NODEJS_PORT || nconf.get('database:port');
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || nconf.get('host');
+var port = process.env.OPENSHIFT_NODEJS_PORT || nconf.get('port');
 app.listen( port, ipaddress, function() {
     console.log((new Date()) + ' Server is listening on port '+port);
 });

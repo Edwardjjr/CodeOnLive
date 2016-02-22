@@ -1,7 +1,7 @@
 {
+  "host": "127.0.0.1",
+  "port": 8080,
   "database": {
-    "host": "127.0.0.1",
-    "port": 8080,
     "localUrl": "mongodb://localhost/test2",
     "OPENSHIFT_APP_NAME_SCALABLE": "nodejs"
   },

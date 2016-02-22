@@ -53,7 +53,7 @@ E_App.post('/', function(pReq, pRes) {
 		
 		
 		}
-		catch (ex) {
+		catch (err) {
 		    I_OnLiveLogger.SendMessage('Error al parsear el json recibido del api de tanaza: '+ err, "error");
 		}
 
@@ -204,6 +204,16 @@ var registerLogin = function(pJsonBody)
 	}
 
 }
+
+/*----------------------------------------------------------------------
+Paramteros: pUser: Json con la informacion de usuario enviada en el login.
+			pUserDataBase: usuario recuperado de la base de datos.
+
+Decripcion:
+Se encarga de comparar el usuario registrado en la base de datos y el 
+recibido en el login si alguno de los valores cambio el mismo es actuli-
+zado, y se registra en cambio.
+-----------------------------------------------------------------------*/
 
 var UpdateUser = function(pUser, pUserDataBase)
 {

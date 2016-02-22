@@ -51,7 +51,6 @@ E_App.post('/', function(pReq, pRes) {
 		try
 		{
 			_jsonBody = JSON.parse(pChunk);
-			console.log(_jsonBody[0]['id']);
 			I_LogDataBase.RegisterLogin(_jsonBody,registerLogin,_jsonBody[0]['id']);
 		
 		
@@ -262,3 +261,5 @@ var UpdateUser = function(pUser, pUserDataBase)
 		}
 	}
 }
+
+module.exports.registerLogin = registerLogin;

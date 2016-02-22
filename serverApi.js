@@ -157,8 +157,8 @@ Decripcion:
 Se encarga de levantar el servidor para escuchar las peticiones.
 -----------------------------------------------------------------------*/
 
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP || E_Nconf.get('database:host');
-var port = process.env.OPENSHIFT_NODEJS_PORT || E_Nconf.get('database:port');
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || E_Nconf.get('host');
+var port = process.env.OPENSHIFT_NODEJS_PORT || E_Nconf.get('port');
 E_App.listen( port, ipaddress, function() {
     console.log((new Date()) + ' Server is listening on port'+ port);
 });
