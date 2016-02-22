@@ -9,6 +9,11 @@ var CronJob = require('cron').CronJob;
 var I_Cron = require('./cron/index.js');
 
 
+/*----------------------------------------------------------------------
+Decripcion:
+Se ejecuta todos los dias a las 00:30 intentando processar login 
+pendientes.
+-----------------------------------------------------------------------*/
 var job = new CronJob({
   cronTime: "00 30 00 * * *",
   onTick: function() {
@@ -17,6 +22,7 @@ var job = new CronJob({
   start: false
 });
 job.start();
+
 
 
 app.use(bodyParser.urlencoded());
