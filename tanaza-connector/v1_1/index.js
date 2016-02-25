@@ -106,7 +106,7 @@ var registerLogin = function(pJsonBody)
 		        }
 		        else
 		        {
-		        	I_OnLiveLogger.SendMessage('Se recive datos de un Ap no registrado'+_JsonLogin["ap_id"], "warn");
+		        	I_OnLiveLogger.SendMessage('Se reciben datos de un Ap no registrado'+_JsonLogin["ap_id"], "warn");
 		        }
 		        M_User.findOne({id:_JsonLogin["client"]["id"]}).exec(function(err,results)
 		        {
@@ -137,7 +137,7 @@ var registerLogin = function(pJsonBody)
 						_user.save(function(err) {
 							if (err)
 							{
-								I_OnLiveLogger.SendMessage('Se recibe datos de un user no registrado'+_JsonLogin["client"]["id"], "warn");
+								I_OnLiveLogger.SendMessage('User no fue salvado en la base de datos '+ _pJsonLogin["client"]["id"]+' '+ err, "warn");
 							}
 							else
 							{
@@ -243,8 +243,9 @@ var UpdateUser = function(pUser, pUserDataBase)
 		{
 			if(pUser[_fields[_counterField]]!= pUserDataBase[_fields[_counterField]])
 			{
+				
 				var _stringField = _fields[_counterField];
-				M_User.update({"id":pUserDataBase["id"]},{ $set: { _stringField: pUser[_fields[_counterField]] }},{ multi: true },
+				M_User.update({"_id":pUserDataBase["id"]},{ $set: { _stringField: pUser[_fields[_counterField]] }},{ multi: true },
 					function  (err, numAffected) {
 						if(err)
 						{
