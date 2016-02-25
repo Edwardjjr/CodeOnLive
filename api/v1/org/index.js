@@ -17,7 +17,8 @@ var I_Ap = require('../ap/index.js');
 var I_Aps = require('../aps/index.js');
 var I_Users = require('../users/index.js');
 var I_User = require('../user/index.js');
-var I_Client = require('../client/index.js')
+var I_Client = require('../client/index.js');
+var I_OnLiveLogger = require('../../../common/onLiveLogger/index.js');
 
 
 
@@ -96,7 +97,14 @@ E_App.post('/:org_id/client', function(pReq, pRes) {
 	
 	pReq.on('data', function (chunk) {
 		var jsonbody = JSON.parse(chunk);
-		I_Client.registerClient(pReq.params.org_id,jsonbody["Name"],jsonbody["Email"],jsonbody["Password"],jsonbody["Permits"]);
+		try
+		{
+			I_Client.registerClient(pReq.params.org_id,jsonbody["Name"],jsonbody["Email"],jsonbody["Password"],jsonbody["Permits"]);
+		}
+		catch (err)
+		{
+			I_OnLiveLogger('Error user register: '+ err, 'warn');
+		}
 	});
 	pReq.on('end', function () {
 		pRes.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});

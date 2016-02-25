@@ -6,7 +6,7 @@ Externos: Sus nombres se trabajan con un E_.
 Internos: Sus nombres se trabajan con una I_
 Modelo de base de datos: Sus nombres se trabajan con una M_
 -----------------------------------------------------------------------*/
-var M_User = require('../../../model/user');
+var M_User = require('../../../model/userV2');
 
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
 	-----------------------------------------------------------------------*/
 	userByOrg: function(pOrg_id,pUser_id,pRes)
 	{
-		M_User.findOne({org_id:pOrg_id}&&{_id:pUser_id}).exec(function (err,results){	
+		M_User.findOne({org_id_OnLive:pOrg_id}&&{_id:pUser_id}).exec(function (err,results){	
 			pRes.status(200).jsonp(results);
 		});
 	}

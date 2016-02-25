@@ -7,7 +7,7 @@ Internos: Sus nombres se trabajan con una I_
 Modelo de base de datos: Sus nombres se trabajan con una M_
 -----------------------------------------------------------------------*/
 
-var M_Login = require('../../../model/login');
+var M_Login = require('../../../model/loginV2');
 
 
 module.exports = {
