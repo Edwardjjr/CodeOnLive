@@ -243,6 +243,7 @@ var UpdateUser = function(pUser, pUserDataBase)
 		{
 			if(pUser[_fields[_counterField]]!= pUserDataBase[_fields[_counterField]])
 			{
+				
 				var _stringField = _fields[_counterField];
 				M_User.update({"_id":pUserDataBase["id"]},{ $set: { _stringField: pUser[_fields[_counterField]] }},{ multi: true },
 					function  (err, numAffected) {

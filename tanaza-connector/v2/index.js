@@ -227,6 +227,7 @@ var UpdateUser = function(pUser, pUserDataBase)
 			{
 				if(pUser[_fields[_counterField]][_fieldsLocation[_counterFieldLocation]]!= pUserDataBase[_fields[_counterField]])
 				{
+					
 					var _stringField = 'location.'+[_fieldsLocation[_counterFieldLocation]];
 					M_User.update({"_id":pUserDataBase["id"]},{ $set: { _stringField: pUser[_fields[_counterField]] }},{ multi: true },
 					function  (err, numAffected) {
