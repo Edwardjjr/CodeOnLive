@@ -510,3 +510,235 @@
 {"level":"info","message":"Se actualizo el usuario 3258670 el campo location.latitude: Anterior: undefined Actual: null","timestamp":"2016-02-22T20:31:30.442Z"}
 {"level":"info","message":"Se actualizo el usuario 3258670 el campo location.longitude: Anterior: undefined Actual: null","timestamp":"2016-02-22T20:31:30.447Z"}
 {"level":"info","message":"Create Login 11859226","timestamp":"2016-02-22T20:31:30.456Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T13:30:15.931Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T13:39:43.303Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T13:49:44.047Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T13:59:44.851Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T14:09:45.652Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T14:19:46.445Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T14:24:10.002Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T14:34:10.863Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T14:44:11.650Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T14:45:48.143Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T14:45:48.153Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T14:51:12.961Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T14:52:33.686Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T15:02:35.543Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T15:12:36.256Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T15:22:36.994Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T15:32:37.674Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T15:42:38.311Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T15:49:48.183Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T15:49:48.222Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T15:59:18.099Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:01:30.257Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:04:25.544Z"}
+{"date":"Tue Feb 23 2016 10:04:33 GMT-0600 (Central America Standard Time)","process":{"pid":9960,"uid":null,"gid":null,"cwd":"C:\\Users\\Edward Jimenez\\Documents\\GitHub\\CodeOnLive","execPath":"C:\\Program Files\\nodejs\\node.exe","version":"v5.3.0","argv":["C:\\Program Files\\nodejs\\node.exe","C:\\Users\\Edward Jimenez\\Documents\\GitHub\\CodeOnLive\\serverApi.js"],"memoryUsage":{"rss":52219904,"heapTotal":36382208,"heapUsed":20950624}},"os":{"loadavg":[0,0,0],"uptime":225791.8723534},"trace":[{"column":16,"file":"Jimenez\\Documents\\GitHub\\CodeOnLive\\api\\v1\\users\\index.js","function":"C:\\Users\\Edward","line":23,"method":null,"native":false},{"column":28,"file":"Jimenez\\Documents\\GitHub\\CodeOnLive\\node_modules\\mongoose\\lib\\query.js","function":"Query.<anonymous> (C:\\Users\\Edward","line":2149,"method":"<anonymous> (C:\\Users\\Edward","native":false},{"column":19,"file":"Jimenez\\Documents\\GitHub\\CodeOnLive\\node_modules\\kareem\\index.js","function":"C:\\Users\\Edward","line":177,"method":null,"native":false},{"column":16,"file":"Jimenez\\Documents\\GitHub\\CodeOnLive\\node_modules\\kareem\\index.js","function":"C:\\Users\\Edward","line":109,"method":null,"native":false},{"column":9,"file":"node.js","function":"nextTickCallbackWith0Args","line":433,"method":null,"native":false},{"column":13,"file":"node.js","function":"process._tickCallback","line":362,"method":"_tickCallback","native":false}],"stack":["ReferenceError: res is not defined","    at C:\\Users\\Edward Jimenez\\Documents\\GitHub\\CodeOnLive\\api\\v1\\users\\index.js:23:16","    at Query.<anonymous> (C:\\Users\\Edward Jimenez\\Documents\\GitHub\\CodeOnLive\\node_modules\\mongoose\\lib\\query.js:2149:28)","    at C:\\Users\\Edward Jimenez\\Documents\\GitHub\\CodeOnLive\\node_modules\\kareem\\index.js:177:19","    at C:\\Users\\Edward Jimenez\\Documents\\GitHub\\CodeOnLive\\node_modules\\kareem\\index.js:109:16","    at nextTickCallbackWith0Args (node.js:433:9)","    at process._tickCallback (node.js:362:13)"],"level":"error","message":"uncaughtException: res is not defined","timestamp":"2016-02-23T16:04:33.624Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:05:01.514Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:05:40.803Z"}
+{"level":"info","message":"Error de token:JsonWebTokenError: jwt malformed","timestamp":"2016-02-23T16:06:42.677Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T16:07:01.207Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T16:07:01.217Z"}
+{"level":"info","message":"Error de token:JsonWebTokenError: jwt malformed","timestamp":"2016-02-23T16:07:21.130Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:09:43.030Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:19:21.805Z"}
+{"level":"info","message":"Client saved successfully!","timestamp":"2016-02-23T16:19:33.438Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:21:29.256Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:31:30.067Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:41:30.816Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:51:31.547Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T16:52:00.901Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T17:02:39.644Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T17:12:40.407Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T17:22:41.089Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T17:32:41.774Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T17:42:42.480Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T17:52:43.250Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T18:02:44.007Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T18:12:44.767Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:17:43.764Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:17:43.798Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:17:51.803Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:17:51.809Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:18:21.922Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:18:21.931Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:25:14.655Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:25:14.663Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:28:44.485Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:28:44.494Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:29:48.641Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:29:48.648Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T18:39:49.568Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:46:01.407Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:46:01.415Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:46:51.694Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:46:51.699Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:48:29.201Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:48:29.207Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:49:07.940Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:49:07.947Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:49:19.928Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:49:19.933Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:55:13.198Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:55:13.203Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:55:30.072Z"}
+{"level":"info","message":"Error de token:TokenExpiredError: jwt expired","timestamp":"2016-02-23T18:55:30.081Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T19:05:31.015Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T19:15:31.710Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T19:25:32.455Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T19:35:33.000Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T19:45:33.772Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T19:55:34.344Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:05:34.866Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:15:35.418Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:23:03.588Z"}
+{"level":"info","message":"Error de token:JsonWebTokenError: jwt malformed","timestamp":"2016-02-23T20:23:26.600Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:24:07.052Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:27:30.341Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:28:32.233Z"}
+{"level":"info","message":"recevid login: 11859227","timestamp":"2016-02-23T20:28:37.572Z"}
+{"level":"info","message":"Se actualizo el usuario3258665 el campo birthday: Anterior: Mon May 26 1986 18:00:00 GMT-0600 (Central America Standard Time) Actual: 1986-05-27","timestamp":"2016-02-23T20:28:37.762Z"}
+{"level":"info","message":"Se actualizo el usuario 3258665 el campo location.name: Anterior: undefined Actual: undefined","timestamp":"2016-02-23T20:28:37.771Z"}
+{"level":"info","message":"Se actualizo el usuario 3258665 el campo location.city: Anterior: undefined Actual: undefined","timestamp":"2016-02-23T20:28:37.778Z"}
+{"level":"info","message":"Se actualizo el usuario 3258665 el campo location.country: Anterior: undefined Actual: undefined","timestamp":"2016-02-23T20:28:37.784Z"}
+{"level":"info","message":"Se actualizo el usuario 3258665 el campo location.country_code: Anterior: undefined Actual: undefined","timestamp":"2016-02-23T20:28:37.791Z"}
+{"level":"info","message":"Se actualizo el usuario 3258665 el campo location.latitude: Anterior: undefined Actual: undefined","timestamp":"2016-02-23T20:28:37.797Z"}
+{"level":"info","message":"Se actualizo el usuario 3258665 el campo location.longitude: Anterior: undefined Actual: undefined","timestamp":"2016-02-23T20:28:37.802Z"}
+{"level":"info","message":"Create Login 11859227","timestamp":"2016-02-23T20:28:37.820Z"}
+{"level":"info","message":"Proccess Login: 11859227","timestamp":"2016-02-23T20:28:37.860Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:28:48.993Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:29:11.304Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:29:18.399Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:31:51.903Z"}
+{"level":"info","message":"recevid login: 11859226","timestamp":"2016-02-23T20:33:07.165Z"}
+{"level":"info","message":"Se actualizo el usuario3258670 el campo last_name: Anterior: F Actual: M","timestamp":"2016-02-23T20:33:07.266Z"}
+{"level":"info","message":"Se actualizo el usuario3258670 el campo birthday: Anterior: Mon May 26 1986 18:00:00 GMT-0600 (Central America Standard Time) Actual: 1986-05-27","timestamp":"2016-02-23T20:33:07.276Z"}
+{"level":"info","message":"Se actualizo el usuario 3258670 el campo location.name: Anterior: undefined Actual: null","timestamp":"2016-02-23T20:33:07.285Z"}
+{"level":"info","message":"Se actualizo el usuario 3258670 el campo location.city: Anterior: undefined Actual: null","timestamp":"2016-02-23T20:33:07.291Z"}
+{"level":"info","message":"Se actualizo el usuario 3258670 el campo location.country: Anterior: undefined Actual: null","timestamp":"2016-02-23T20:33:07.299Z"}
+{"level":"info","message":"Se actualizo el usuario 3258670 el campo location.country_code: Anterior: undefined Actual: null","timestamp":"2016-02-23T20:33:07.308Z"}
+{"level":"info","message":"Se actualizo el usuario 3258670 el campo location.latitude: Anterior: undefined Actual: null","timestamp":"2016-02-23T20:33:07.319Z"}
+{"level":"info","message":"Se actualizo el usuario 3258670 el campo location.longitude: Anterior: undefined Actual: null","timestamp":"2016-02-23T20:33:07.331Z"}
+{"level":"info","message":"Create Login 11859226","timestamp":"2016-02-23T20:33:07.363Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:36:07.226Z"}
+{"level":"info","message":"recevid login: 11859226","timestamp":"2016-02-23T20:36:23.539Z"}
+{"level":"info","message":"Create user 3258670","timestamp":"2016-02-23T20:36:23.729Z"}
+{"level":"info","message":"Create Login 11859226","timestamp":"2016-02-23T20:36:23.733Z"}
+{"level":"info","message":"recevid login: 11859226","timestamp":"2016-02-23T20:37:50.941Z"}
+{"level":"warn","message":"Se recibe datos de un user no registrado3258671","timestamp":"2016-02-23T20:37:50.970Z"}
+{"level":"warn","message":"Login no registrado11859227","timestamp":"2016-02-23T20:37:50.980Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:40:28.837Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:41:19.410Z"}
+{"level":"info","message":"recevid login: 11859227","timestamp":"2016-02-23T20:41:29.328Z"}
+{"level":"warn","message":"Se recibe datos de un user no registrado3258671","timestamp":"2016-02-23T20:41:29.424Z"}
+{"level":"warn","message":"Login no registrado11859227","timestamp":"2016-02-23T20:41:29.428Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:43:07.604Z"}
+{"level":"info","message":"recevid login: 11859227","timestamp":"2016-02-23T20:43:15.374Z"}
+{"level":"warn","message":"Se recibe datos de un user no registrado3258671","timestamp":"2016-02-23T20:43:15.489Z"}
+{"level":"warn","message":"Login no registrado11859227","timestamp":"2016-02-23T20:43:15.496Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:46:32.886Z"}
+{"level":"info","message":"recevid login: 11859227","timestamp":"2016-02-23T20:46:35.957Z"}
+{"level":"warn","message":"User no fue salvado en la base de datos 3258671 ValidationError: CastError: Cast to Date failed for value \"1986-15-27\" at path \"birthday\"","timestamp":"2016-02-23T20:46:36.076Z"}
+{"level":"warn","message":"Login no registrado11859227","timestamp":"2016-02-23T20:46:36.083Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:49:01.139Z"}
+{"level":"info","message":"recevid login: 11859227","timestamp":"2016-02-23T20:49:03.251Z"}
+{"level":"info","message":"Create user 3258671","timestamp":"2016-02-23T20:49:03.363Z"}
+{"level":"info","message":"Create Login 11859227","timestamp":"2016-02-23T20:49:03.368Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:49:20.764Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:51:42.535Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T20:59:37.306Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:02:06.966Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:05:50.852Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:07:26.460Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:08:46.413Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:09:29.507Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:19:30.024Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:29:30.524Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:39:31.063Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:49:31.571Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T21:59:32.080Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T22:09:32.584Z"}
+{"code":"ECONNRESET","errno":"ECONNRESET","syscall":"read","level":"error","timestamp":"2016-02-23T22:15:15.515Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:16.522Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:17.527Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:18.533Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:19.538Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:20.543Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:22.550Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:24.555Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:26.561Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:28.565Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:30.575Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:34.580Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:38.585Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:42.590Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:46.595Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:50.599Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:15:58.605Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:16:06.608Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:16:14.614Z"}
+{"code":"ENOENT","errno":"ENOENT","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-23T22:16:22.619Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T22:16:31.023Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T22:17:44.171Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T22:18:06.019Z"}
+{"level":"info","message":"recevid login: 11859227","timestamp":"2016-02-23T22:18:10.542Z"}
+{"level":"info","message":"Se actualizo el usuario3258671 el campo birthday: Anterior: Wed Nov 26 1986 18:00:00 GMT-0600 (Central America Standard Time) Actual: 1986-11-27","timestamp":"2016-02-23T22:18:10.645Z"}
+{"level":"info","message":"Se actualizo el usuario 3258671 el campo location.name: Anterior: null Actual: null","timestamp":"2016-02-23T22:18:10.654Z"}
+{"level":"info","message":"Se actualizo el usuario 3258671 el campo location.city: Anterior: null Actual: null","timestamp":"2016-02-23T22:18:10.664Z"}
+{"level":"info","message":"Se actualizo el usuario 3258671 el campo location.country: Anterior: null Actual: null","timestamp":"2016-02-23T22:18:10.677Z"}
+{"level":"info","message":"Se actualizo el usuario 3258671 el campo location.country_code: Anterior: null Actual: null","timestamp":"2016-02-23T22:18:10.683Z"}
+{"level":"info","message":"Se actualizo el usuario 3258671 el campo location.latitude: Anterior: null Actual: null","timestamp":"2016-02-23T22:18:10.689Z"}
+{"level":"info","message":"Se actualizo el usuario 3258671 el campo location.longitude: Anterior: null Actual: null","timestamp":"2016-02-23T22:18:10.704Z"}
+{"level":"info","message":"Create Login 11859227","timestamp":"2016-02-23T22:18:10.729Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T22:20:22.247Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T22:20:29.107Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T22:30:29.703Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T22:40:30.249Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T22:50:35.539Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T23:00:36.235Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T23:10:36.916Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T23:20:37.622Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T23:30:38.009Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T23:40:38.887Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-23T23:50:39.597Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T00:00:40.190Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T00:10:41.201Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T00:20:42.177Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T00:30:43.574Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T00:40:44.913Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T00:50:45.938Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T01:00:47.114Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T01:10:47.922Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T01:20:48.514Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T01:30:49.196Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T01:40:50.201Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T01:50:50.937Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T02:00:51.522Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T02:10:52.129Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T02:20:53.690Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T02:30:54.830Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T02:40:55.463Z"}
+{"code":"ECONNRESET","errno":"ECONNRESET","syscall":"read","level":"error","timestamp":"2016-02-24T05:44:31.765Z"}
+{"code":"ENOTFOUND","errno":"ENOTFOUND","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-24T05:44:34.495Z"}
+{"code":"ENOTFOUND","errno":"ENOTFOUND","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-24T05:44:37.213Z"}
+{"code":"ENOTFOUND","errno":"ENOTFOUND","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-24T05:44:38.498Z"}
+{"code":"ENOTFOUND","errno":"ENOTFOUND","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-24T05:44:39.740Z"}
+{"code":"ENOTFOUND","errno":"ENOTFOUND","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-24T05:44:42.016Z"}
+{"code":"ENOTFOUND","errno":"ENOTFOUND","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-24T05:44:44.296Z"}
+{"code":"ENOTFOUND","errno":"ENOTFOUND","syscall":"getaddrinfo","hostname":"logs3.papertrailapp.com","host":"logs3.papertrailapp.com","port":23794,"level":"error","timestamp":"2016-02-24T05:44:48.966Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T05:44:53.081Z"}
+{"code":"ECONNRESET","errno":"ECONNRESET","syscall":"read","level":"error","timestamp":"2016-02-24T12:30:39.594Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-24T12:30:46.651Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T13:44:26.818Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T13:54:27.407Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T14:04:27.994Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T14:14:28.699Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T14:24:29.526Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T14:34:30.202Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T14:44:30.990Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T14:54:31.647Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T15:04:33.335Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T15:14:34.120Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T15:24:34.773Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T15:34:35.390Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-25T15:44:38.735Z"}
