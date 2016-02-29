@@ -8,7 +8,6 @@ var mongoose = require('mongoose');
 var CronJob = require('cron').CronJob;
 var I_Cron = require('./cron/index.js');
 
-
 /*----------------------------------------------------------------------
 Decripcion:
 Se ejecuta todos los dias a las 00:30 intentando processar login 
@@ -50,7 +49,6 @@ var connect = function () {
     mongoose.connect(url);
 };
 connect();
-
 
 app.use('/tanaza-connector', require('./tanaza-connector'));
 

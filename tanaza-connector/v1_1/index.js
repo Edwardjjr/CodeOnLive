@@ -210,54 +210,37 @@ var registerLogin = function(pJsonBody)
 }
 
 var UpdateUser = function(pUser, pUserDataBase)
-{
+{	
 	var _fields=["first_name","last_name","picture","gender","email","phone","birthday","logins_count","location"];
 	var _fieldsLocation = ["name","city","country","country_code","latitude","longitude"] 
 	for(_counterField in _fields)
 	{
-		if(_fields[_counterField] == "location")
+		var _field =  _fields[_counterField];
+		if(_field == "location")
 		{
 			for(_counterFieldLocation in _fieldsLocation)
 			{
-				if(pUser[_fields[_counterField]][_fieldsLocation[_counterFieldLocation]]!= pUserDataBase[_fields[_counterField]])
+
+
+				var _fieldLocation = _fieldsLocation[_counterFieldLocation];
+				if((pUser[_field][_fieldLocation] != pUserDataBase[_field][_fieldLocation]) && (pUser[_field][_fieldLocation] != null))
 				{
-					var _stringField = 'location.'+[_fieldsLocation[_counterFieldLocation]];
-					M_User.update({"id":pUserDataBase["id"]},{ $set: { _stringField: pUser[_fields[_counterField]] }},{ multi: true },
-					function  (err, numAffected) {
-						if(err)
-						{
-							I_OnLiveLogger.SendMessage( 'Error no se actualizo en Usuario: ' + pUser["id"], 'error');
-						}
-						else
-						{
-							I_OnLiveLogger.SendMessage('Se actualizo el usuario '+pUser["id"] + ' el campo '+ _stringField+ 
-							': Anterior: '+ pUserDataBase[_fields[_counterField]][_fieldsLocation[_counterFieldLocation]]+ 
-							' Actual: ' + pUser[_fields[_counterField]][_fieldsLocation[_counterFieldLocation]] , "info");
-						}
-						
-					});
+					I_OnLiveLogger.SendMessage('Se actualizo el usuario '+pUser["id"] + ' el campo '+ _fieldLocation + 
+					' Anterior: '+ pUserDataBase[_field][_fieldLocation]+ 
+					' Actual: ' + pUser[_field][_fieldLocation] , "info");
+				}
+				if(_counterFieldLocation == _fieldsLocation.length)
+				{
+					results.UpdateUser(pUser);
 				}
 			}
 		}
 		else
 		{
-			if(pUser[_fields[_counterField]]!= pUserDataBase[_fields[_counterField]])
+			if((pUser[_field]!= pUserDataBase[_field])&&(pUser[_field]!= null))
 			{
-
-				var _stringField = _fields[_counterField];
-				M_User.update({"id":pUserDataBase["id"]},{ $set: { _stringField: pUser[_fields[_counterField]] }},{ multi: true },
-					function  (err, numAffected) {
-						if(err)
-						{
-							I_OnLiveLogger.SendMessage( 'Error no se actualizo en Usuario: ' + pId, 'error');
-						}
-						else
-						{
-							I_OnLiveLogger.SendMessage('Se actualizo el usuario'+pUser["id"] + ' el campo '+ _fields[_counterField]+ 
-							': Anterior: '+ pUserDataBase[_fields[_counterField]]+ ' Actual: ' + pUser[_fields[_counterField]] , "info");
-						}
-						
-					});
+				I_OnLiveLogger.SendMessage('Se actualizo el usuario '+pUser["id"] + ' el campo '+ _field+ 
+				': Anterior: '+ pUserDataBase[_field] + ' Actual: ' + pUser[_field] , "info");		
 			}
 		}
 	}
