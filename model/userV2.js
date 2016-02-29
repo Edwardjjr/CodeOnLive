@@ -13,6 +13,7 @@ var userSchema = new Schema({
 		phone:String,
 		birthday:Date,
 		logins_count:Number,
+		created_at: Date,
 		location:
         {
 	        name:String,

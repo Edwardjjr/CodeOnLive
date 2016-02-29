@@ -123,6 +123,7 @@ var registerLogin = function(pJsonBody)
 							phone:_JsonLogin["client"]["phone"],
 							birthday:_JsonLogin["client"]["birthday"],
 							logins_count:_JsonLogin["client"]["logins_count"],
+							created_at: new Date(),
 							location:
 		                    {
 		                        name:_JsonLogin["client"]["location"]["name"],

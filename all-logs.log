@@ -970,3 +970,28 @@
 {"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T01:51:04.624Z"}
 {"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T01:58:41.939Z"}
 {"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T02:08:45.392Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T15:11:57.870Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T15:21:59.093Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T15:32:00.055Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T15:42:00.582Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T15:52:01.143Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T16:02:02.267Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T16:12:02.836Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T16:22:03.367Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T16:32:04.021Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T16:42:04.822Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T16:52:05.839Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T17:02:07.769Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T17:12:08.644Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T17:22:09.986Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T17:32:11.365Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T17:42:12.770Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T17:52:13.754Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T18:02:15.115Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T18:12:16.804Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T18:18:50.148Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-02-29T18:18:58.040Z"}
+{"level":"info","message":"recevid login: 11859226","timestamp":"2016-02-29T18:20:14.933Z"}
+{"level":"info","message":"Create user 3258670","timestamp":"2016-02-29T18:20:15.155Z"}
+{"level":"info","message":"Create Login 11859226","timestamp":"2016-02-29T18:20:15.159Z"}
+{"level":"info","message":"Proccess Login: 11859226","timestamp":"2016-02-29T18:20:15.186Z"}
