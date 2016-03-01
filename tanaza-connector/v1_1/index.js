@@ -230,9 +230,9 @@ var UpdateUser = function(pUser, pUserDataBase)
 					' Anterior: '+ pUserDataBase[_field][_fieldLocation]+ 
 					' Actual: ' + pUser[_field][_fieldLocation] , "info");
 				}
-				if(_counterFieldLocation == _fieldsLocation.length)
+				if(_counterFieldLocation == (_fieldsLocation.length-1))
 				{
-					results.UpdateUser(pUser);
+					pUserDataBase.UpdateUser(pUser);
 				}
 			}
 		}
