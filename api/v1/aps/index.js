@@ -15,7 +15,7 @@ module.exports = {
 
 	ApsByVenue: function(pOrg_id,pVenue_id,pRes)
 	{
-		M_Ap.find({org_id:pOrg_id}&&{venue_id:pVenue_id}).exec(function (err,results){	
+		M_Ap.find({org_id:pOrg_id,venue_id:pVenue_id}).exec(function (err,results){	
 			pRes.status(200).jsonp(results);
 		});
 	},

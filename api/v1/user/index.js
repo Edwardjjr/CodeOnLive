@@ -20,7 +20,7 @@ module.exports = {
 	-----------------------------------------------------------------------*/
 	userByOrg: function(pOrg_id,pUser_id,pRes)
 	{
-		M_User.findOne({org_id_OnLive:pOrg_id}&&{_id:pUser_id}).exec(function (err,results){	
+		M_User.findOne({org_id_OnLive:pOrg_id,_id:pUser_id}).exec(function (err,results){	
 			pRes.status(200).jsonp(results);
 		});
 	}

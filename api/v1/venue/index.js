@@ -42,7 +42,7 @@ module.exports = {
 	},
 	venueByOrg: function(pOrg_id,pVenue_id,pRes)
 	{
-		M_Venue.findOne({org_id:pOrg_id}&&{_id:pVenue_id}).exec(function (err,results){	
+		M_Venue.findOne({org_id:pOrg_id,_id:pVenue_id}).exec(function (err,results){	
 			pRes.status(200).jsonp(results);
 		});
 	}

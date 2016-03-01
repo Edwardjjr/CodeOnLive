@@ -51,7 +51,7 @@ module.exports = {
 	-----------------------------------------------------------------------*/
 	findLoginsByAp: function(pOrg_id,pVenue_id,Ap_id,pRes)
 	{
-		M_Login.find({org_id_OnLive:pOrg_id}&&{venue_id_OnLive:pVenue_id}&&{ap_id_OnLive:Ap_id}).exec(function (err,results){	
+		M_Login.find({org_id_OnLive:pOrg_id,venue_id_OnLive:pVenue_id,ap_id_OnLive:Ap_id}).exec(function (err,results){	
 			pRes.status(200).jsonp(results);
 		});
 	} 
