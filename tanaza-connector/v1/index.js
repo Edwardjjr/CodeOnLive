@@ -232,7 +232,7 @@ var UpdateUser = function(pUser, pUserDataBase)
 			if((getTanazaLoginProviderName(pUser[_field])!= pUserDataBase[_field])&&(pUser[_field]!= null))
 			{
 				I_OnLiveLogger.SendMessage('Se actualizo el usuario '+pUser["id"] + ' el campo '+ _field+ 
-				': Anterior: '+ pUserDataBase[_field] + ' Actual: ' + pUser[_field] , "info");		
+				': Anterior: '+ pUserDataBase[_field] + ' Actual: ' + getTanazaLoginProviderName(pUser[_field]) , "info");		
 			}
 		}
 		else
