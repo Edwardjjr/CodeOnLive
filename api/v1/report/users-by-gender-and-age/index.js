@@ -10,33 +10,59 @@ var E_Express = require('express');
 var E_App = module.exports = E_Express();
 var M_User = require('../../../../model/userV2')
 
-var _ages = [0,17,29,39,49,59,150];
-var _males= [];
-var _females= [];
-var _others = [0];
-var _counter = 0;
-var _response = [["Range","Hombres","Mujeres", "Género ND"]];
-var _filtersName =["ND","17-","18-29","30-39","40-49","50-59","60+"]
-var _counterBulider = 0;
-var date = new Date();
-var _endBirthday = null;
-_fromBirthday = null;
+var _ages;
+var _males;
+var _females;
+var _others;
+var _counter;
+var _response;
+var _filtersName; 
+var _counterBulider;
+var date;
+var _endBirthday;
+var _fromBirthday;
 /*----------------------------------------------------------------------
 Paramteros: pReq: request.
             pRes: response. 
 
 Decripcion:
-Se retorna un Json de la informacion de las organizaciones de la empresa.
+Es una consulta que devuleve la cantidad y de hombres por un rango de edad.
+Se este desea cambiar el rango de las edades se debe cambiar el arreglo
+_array. el _filtersName establece los nombres de cada una de las colunmas
+en el grafico. _response es la arreglo que va ser enviado como respuesta
+este es inicializado con la estructura, luego se agregara las filas 
+correspondientes.
 -----------------------------------------------------------------------*/
 E_App.get('/', function(pReq, pRes) {
+	_response = [["Range","Hombres","Mujeres", "Género ND"]];
+	_ages = [0,17,29,39,49,59,150];
+	_males= [];
+	_females= [];
+	_others = [0];
+	_counter = 0;
+	_response = [["Por edad","Hombres","Mujeres", "Género ND"]];
+	_filtersName =["ND","17-","18-29","30-39","40-49","50-59","60+"]
+	_counterBulider = 0;
+	date = new Date();
+	_endBirthday = null;
+	_fromBirthday = null;
 	searchdate(pReq,pRes);
-	console.log("llego llego");	
 });
 
+
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response.
+
+
+Decripcion:
+realiza la busqueda general y luego llama la metodo que se encarag de 
+formar la table para los ggrafcos de google charts.
+-----------------------------------------------------------------------*/
 var searchdate = function(pReq,pRes)
 {
-	var _start = new Date(pReq.query['from']);
-	var _end = new Date(pReq.query['end']);
+	var _start = Date.parse(pReq.query['from']);
+	var _end = Date.parse(pReq.query['end']);
 	var _organization =  pReq.query['organization'];
 
 	if(_counter < (_ages.length - 1))
@@ -51,7 +77,19 @@ var searchdate = function(pReq,pRes)
 		searchNoAgeMale(CreateTable,_start,_end,_organization,pReq,pRes);
 	}
 }
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response.
+            pStart: fecha de inicio de la consulta.
+            pEnd: fecha de la finalizacion de la consulta
+            pOrganization: el identificador la organizacion por la cual
+            se realiza la consulta.
+            cb: searchdate (callback)
 
+Decripcion:
+Realiza la busqueda de usuarios por un rengo de fecha(por dia) y su genero 
+sea hombres y los calsifica por un rango de edad.
+-----------------------------------------------------------------------*/
 var searchMale = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pOrganization, 
@@ -65,6 +103,19 @@ var searchMale = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 	);
 };
 
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response.
+            pStart: fecha de inicio de la consulta.
+            pEnd: fecha de la finalizacion de la consulta
+            pOrganization: el identificador la organizacion por la cual
+            se realiza la consulta.
+            cb: searchdate (callback)
+
+Decripcion:
+Realiza la busqueda de usuarios por un rengo de fecha(por dia) y su genero 
+sea mujeres y los calsifica por un rango de edad.
+-----------------------------------------------------------------------*/
 var searchFemale = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pOrganization, 
@@ -78,11 +129,24 @@ var searchFemale = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 	);
 			
 };
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response.
+            pStart: fecha de inicio de la consulta.
+            pEnd: fecha de la finalizacion de la consulta
+            pOrganization: el identificador la organizacion por la cual
+            se realiza la consulta.
+            cb: searchdate (callback)
+
+Decripcion:
+Realiza la busqueda de usuarios por un rengo de fecha(por dia) que no 
+se puede determinar si son hombres o mujeres pero si la edad.
+-----------------------------------------------------------------------*/
 var searchOthers = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pReq.query['organization'], 
 		gender: null,
-		"created_at": {"$gte":new Date(pReq.query['from']), "$lt":new Date(pReq.query['end'])},
+		"created_at": {"$gte":Date.parse(pReq.query['from']), "$lt":Date.parse(pReq.query['end'])},
 		"birthday": {"$gte":_fromBirthday, "$lt":_endBirthday}}
 		).exec(function(err, c) {
    			_others.push(c);
@@ -90,24 +154,51 @@ var searchOthers = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 		}
 	);
 };
+
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response.
+            pStart: fecha de inicio de la consulta.
+            pEnd: fecha de la finalizacion de la consulta
+            pOrganization: el identificador la organizacion por la cual
+            se realiza la consulta.
+            cb: searchdate (callback)
+
+Decripcion:
+Realiza la busqueda de usuarios por un rango de fecha(por dia) por genero
+en este caso hombres pero no se puede determinar su edad.
+-----------------------------------------------------------------------*/
 var searchNoAgeMale= function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pReq.query['organization'], 
 		gender: "male",
 		birthday:null,
-		"created_at": {"$gte":new Date(pReq.query['from']), "$lt":new Date(pReq.query['end'])}}
+		"created_at": {"$gte":Date.parse(pReq.query['from']), "$lt":Date.parse(pReq.query['end'])}}
 		).exec(function(err, c) {
    			_males.unshift(c);
    			searchNoAgeFemale(cb,pStart,pEnd,pOrganization,pReq,pRes);
 		}
 	);
 }
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response.
+            pStart: fecha de inicio de la consulta.
+            pEnd: fecha de la finalizacion de la consulta
+            pOrganization: el identificador la organizacion por la cual
+            se realiza la consulta.
+            cb: searchdate (callback)
+
+Decripcion:
+Realiza la busqueda de usuarios por un rango de fecha(por dia) por genero
+en este caso mujeres pero no se puede determinar su edad.
+-----------------------------------------------------------------------*/
 var searchNoAgeFemale= function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pReq.query['organization'], 
 		gender: "female",
 		birthday:null,
-		"created_at": {"$gte":new Date(pReq.query['from']), "$lt":new Date(pReq.query['end'])}}
+		"created_at": {"$gte":Date.parse(pReq.query['from']), "$lt":Date.parse(pReq.query['end'])}}
 		).exec(function(err, c) {
    			_females.unshift(c);
    			cb(pReq,pRes);
@@ -115,6 +206,15 @@ var searchNoAgeFemale= function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 	);
 }
 
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response.
+
+Decripcion:
+Esta funcion crea encarga de recorrer los datos de la consulat de usuarios 
+nuevos y usuarios conocidos, para enviar la estructura de tabla esperada 
+por google chart para generar un grafico.  
+-----------------------------------------------------------------------*/
 var CreateTable = function(pReq,pRes)
 {
 	if(_counterBulider < _males.length)
@@ -123,13 +223,20 @@ var CreateTable = function(pReq,pRes)
 	}
 	else
 	{
-		console.log(_response);
 		pRes.send(_response);
 	}
 	
 	
 }
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response.
+            cb:CreateTable.
 
+Decripcion:
+Esta funcion crea cada una de las filas de la tabla por enviar como 
+respuesta.
+-----------------------------------------------------------------------*/
 var Insetar= function(pReq,pRes,cb)
 {
 	var _row = [_filtersName[_counterBulider],_males[_counterBulider],

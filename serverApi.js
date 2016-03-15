@@ -96,6 +96,7 @@ o la del servidor dependiendo del ambienite donde se corra el server.
 -----------------------------------------------------------------------*/
 
 var url = E_Nconf.get('database:localUrl');
+//var url = 'mongodb://admin:gHaM1EuPFxE7@56a8f56489f5cf3dc10000d2-onlivecr.rhcloud.com:37576/nodejs';
 if (process.env.OPENSHIFT_MONGODB_DB_URL) {
     url = process.env.OPENSHIFT_MONGODB_DB_URL + E_Nconf.get('database:OPENSHIFT_APP_NAME_SCALABLE');
 }

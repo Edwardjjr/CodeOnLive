@@ -14,6 +14,7 @@ var M_Ap = require('../../model/ap');
 var M_User = require('../../model/userV2');
 var I_OnLiveLogger = require('../../common/onLiveLogger/index.js');
 var I_LogDataBase = require('../../common/logDataBase/index.js');
+var I_Parser= require('../v3/index.js');
 
 /*----------------------------------------------------------------------
 Paramteros: pReq: el request enviado.
@@ -46,15 +47,18 @@ a OnLivelogger con el fin de reportar las acciones del programa.
 
 E_App.post('/', function(pReq, pRes) {
 	pReq.on('data', function (pChunk) {
+		var _jsonBody;
 		try
 		{
-			var _jsonBody = JSON.parse(pChunk);
-			I_LogDataBase.RegisterLogin(_jsonBody,registerLogin,_jsonBody['id']);
+			_jsonBody = JSON.parse(pChunk);
+			I_LogDataBase.RegisterLogin(_jsonBody,registerLogin,_jsonBody[0]['id']);
 		
 		
 		}
-		catch (err) {
-		    I_OnLiveLogger.SendMessage('Error al parsear el json recibido del api de tanaza: '+ err, "error");
+		catch (ex) {
+			//Se modifico por las versiones de parseo.
+			I_Parser.registerLogin(_jsonBody);
+		    //I_OnLiveLogger.SendMessage('Error al parsear el json recibido del api de tanaza: '+ err, "error");
 		}
 
 	});
@@ -63,6 +67,7 @@ E_App.post('/', function(pReq, pRes) {
 		pRes.end();
 	});
 });
+
 
 
 
@@ -83,11 +88,10 @@ var registerLogin = function(pJsonBody)
 	var _venue_id="";
 	var _ap_id = "";
 	var _count = 0;
-	for (_counterLogin in pJsonBody["client"]) {
-		var _pJsonLogin = pJsonBody["client"][_counterLogin];
+	for (_counterLogin in pJsonBody) {
 		_count++;
-
-		M_Ap.findOne({ap_id:_pJsonLogin["ap_id"]}).exec(function(err, results) {
+		var _JsonLogin = pJsonBody[_counterLogin];
+		M_Ap.findOne({ap_id:_JsonLogin["ap_id"]}).exec(function(err, results) {
 			if(err)
 			{
 				I_OnLiveLogger.SendMessage('Se genero un error DataBase: '+err, "warn");
@@ -102,32 +106,32 @@ var registerLogin = function(pJsonBody)
 		        }
 		        else
 		        {
-		        	I_OnLiveLogger.SendMessage('Se recive datos de un Ap no registrado'+_pJsonLogin["ap_id"], "warn");
+		        	I_OnLiveLogger.SendMessage('Se reciben datos de un Ap no registrado'+_JsonLogin["ap_id"], "warn");
 		        }
-		        M_User.findOne({id:_pJsonLogin["client"]["id"]}).exec(function(err,results)
+		        M_User.findOne({id:_JsonLogin["client"]["id"]}).exec(function(err,results)
 		        {
 			        if(results == null)
 			        {
 
 						var _user = new M_User({
-							id:_pJsonLogin["client"]["id"],
-							first_name:_pJsonLogin["client"]["first_name"],
-							last_name:_pJsonLogin["client"]["last_name"],
-							picture:_pJsonLogin["client"]["picture"],
-							gender:_pJsonLogin["client"]["gender"],
-							email:_pJsonLogin["client"]["email"],
-							phone:_pJsonLogin["client"]["phone"],
-							birthday:_pJsonLogin["client"]["birthday"],
-							logins_count:_pJsonLogin["client"]["logins_count"],
+							id:_JsonLogin["client"]["id"],
+							first_name:_JsonLogin["client"]["first_name"],
+							last_name:_JsonLogin["client"]["last_name"],
+							picture:_JsonLogin["client"]["picture"],
+							gender:_JsonLogin["client"]["gender"],
+							email:_JsonLogin["client"]["email"],
+							phone:_JsonLogin["client"]["phone"],
+							birthday:_JsonLogin["client"]["birthday"],
+							logins_count:_JsonLogin["client"]["logins_count"],
 							created_at: new Date(),
 							location:
 		                    {
-		                        name:_pJsonLogin["client"]["location"]["name"],
-		                        city:_pJsonLogin["client"]["location"]["city"],
-		                        country: _pJsonLogin["client"]["location"]["country"],
-		                        country_code: _pJsonLogin["client"]["location"]["country_code"],
-		                        latitude: _pJsonLogin["client"]["location"]["latitude"],
-		                        longitude: _pJsonLogin["client"]["location"]["latitude"]
+		                        name:_JsonLogin["client"]["location"]["name"],
+		                        city:_JsonLogin["client"]["location"]["city"],
+		                        country: _JsonLogin["client"]["location"]["country"],
+		                        country_code: _JsonLogin["client"]["location"]["country_code"],
+		                        latitude: _JsonLogin["client"]["location"]["latitude"],
+		                        longitude: _JsonLogin["client"]["location"]["latitude"]
 		                    },
 							org_id_OnLive:_org_id
 						});
@@ -138,46 +142,46 @@ var registerLogin = function(pJsonBody)
 							}
 							else
 							{
-								I_OnLiveLogger.SendMessage('Create user '+_pJsonLogin["client"]["id"], 'info');
+								I_OnLiveLogger.SendMessage('Create user '+_JsonLogin["client"]["id"], 'info');
 							}
 						});
 					}
 					else
 					{
-						UpdateUser(_pJsonLogin["client"],results)
+						UpdateUser(_JsonLogin["client"],results)
 					}
 
 					var _login = new M_Login({
-					id:_pJsonLogin["id"],
-					ap_id:_pJsonLogin["ap_id"],
-					ssid: _pJsonLogin["ssid"],
-					ip_address:_pJsonLogin["ip_address"],
-					mac_address:_pJsonLogin["mac_address"],
-					auth_method: _pJsonLogin["auth_method"],
-					roaming: _pJsonLogin["roaming"],
-					created_at:_pJsonLogin["created_at"],
+					id:_JsonLogin["id"],
+					ap_id:_JsonLogin["ap_id"],
+					ssid: _JsonLogin["ssid"],
+					ip_address:_JsonLogin["ip_address"],
+					mac_address:_JsonLogin["mac_address"],
+					auth_method: _JsonLogin["auth_method"],
+					roaming: _JsonLogin["roaming"],
+					created_at:_JsonLogin["created_at"],
 					org_id_OnLive:_org_id,
 					venue_id_OnLive:_venue_id,
 					ap_id_OnLive:_ap_id,
 						client:
 						{
-							id:_pJsonLogin["client"]["id"],
-							first_name:_pJsonLogin["client"]["first_name"],
-							last_name:_pJsonLogin["client"]["last_name"],
-							picture:_pJsonLogin["client"]["picture"],
-							gender:_pJsonLogin["client"]["gender"],
-							email:_pJsonLogin["client"]["email"],
-							phone:_pJsonLogin["client"]["phone"],
-							birthday:_pJsonLogin["client"]["birthday"],
-							logins_count:_pJsonLogin["client"]["logins_count"],
+							id:_JsonLogin["client"]["id"],
+							first_name:_JsonLogin["client"]["first_name"],
+							last_name:_JsonLogin["client"]["last_name"],
+							picture:_JsonLogin["client"]["picture"],
+							gender:_JsonLogin["client"]["gender"],
+							email:_JsonLogin["client"]["email"],
+							phone:_JsonLogin["client"]["phone"],
+							birthday:_JsonLogin["client"]["birthday"],
+							logins_count:_JsonLogin["client"]["logins_count"],
 							location:
 		                    {
-		                        name:_pJsonLogin["client"]["location"]["name"],
-		                        city:_pJsonLogin["client"]["location"]["city"],
-		                        country: _pJsonLogin["client"]["location"]["country"],
-		                        country_code: _pJsonLogin["client"]["location"]["country_code"],
-		                        latitude: _pJsonLogin["client"]["location"]["latitude"],
-		                        longitude: _pJsonLogin["client"]["location"]["latitude"]
+		                        name:_JsonLogin["client"]["location"]["name"],
+		                        city:_JsonLogin["client"]["location"]["city"],
+		                        country: _JsonLogin["client"]["location"]["country"],
+		                        country_code: _JsonLogin["client"]["location"]["country_code"],
+		                        latitude: _JsonLogin["client"]["location"]["latitude"],
+		                        longitude: _JsonLogin["client"]["location"]["latitude"]
 		                    }
 						}
 					});
@@ -185,14 +189,14 @@ var registerLogin = function(pJsonBody)
 					_login.save(function(err) {
 						if (err)
 						{
-							I_OnLiveLogger.SendMessage('Login no registrado'+_pJsonLogin["id"], "warn");
+							I_OnLiveLogger.SendMessage('Login no registrado'+_JsonLogin["id"], "warn");
 						}
 						else
 						{
-							I_OnLiveLogger.SendMessage('Create Login '+_pJsonLogin["id"], 'info');
-							if(_count == Object.keys(pJsonBody["client"]).length)
+							I_OnLiveLogger.SendMessage('Create Login '+_JsonLogin["id"], 'info');
+							if(_count == Object.keys(pJsonBody).length)
 						  	{
-						  		I_LogDataBase.UpdateLogin(pJsonBody["id"],'success');
+						  		I_LogDataBase.UpdateLogin(pJsonBody[0]["id"],'success');
 						  	}
 						}
 					 
@@ -205,16 +209,6 @@ var registerLogin = function(pJsonBody)
 	}
 
 }
-
-/*----------------------------------------------------------------------
-Paramteros: pUser: Json con la informacion de usuario enviada en el login.
-			pUserDataBase: usuario recuperado de la base de datos.
-
-Decripcion:
-Se encarga de comparar el usuario registrado en la base de datos y el 
-recibido en el login si alguno de los valores cambio el mismo es actuli-
-zado, y se registra en cambio.
------------------------------------------------------------------------*/
 
 var UpdateUser = function(pUser, pUserDataBase)
 {	
