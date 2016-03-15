@@ -10,7 +10,7 @@ var E_Express = require('express');
 
 var E_Express = require('express');
 var E_App = module.exports = E_Express();
-var M_Login = require('../../../../model/loginV2')
+var M_Login = require('../../../../model/login')
 
 var NUMBER_OF_WEEK = 4;
 var PAST_WEEK= 2;

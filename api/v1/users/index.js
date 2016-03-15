@@ -6,7 +6,7 @@ Externos: Sus nombres se trabajan con un E_.
 Internos: Sus nombres se trabajan con una I_
 Modelo de base de datos: Sus nombres se trabajan con una M_
 -----------------------------------------------------------------------*/
-var M_User = require('../../../model/userV2');
+var M_User = require('../../../model/user');
 
 
 module.exports = {

@@ -8,7 +8,7 @@ Modelo de base de datos: Sus nombres se trabajan con una M_
 -----------------------------------------------------------------------*/
 var E_Express = require('express');
 var E_App = module.exports = E_Express();
-var M_User = require('../../../../model/userV2')
+var M_User = require('../../../../model/user')
 
 var _ages;
 var _males;
@@ -94,8 +94,8 @@ var searchMale = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pOrganization, 
 		gender:"male",
-		"created_at": {"$gte":pStart, "$lt":pEnd},
-		"birthday": {"$gte":_fromBirthday, "$lt":_endBirthday}}
+		"created_at": {"$gte":pStart.toISOString(), "$lt":pEnd.toISOString()},
+		"birthday": {"$gte":_fromBirthday.toISOString(), "$lt":_endBirthday.toISOString()}}
 		).exec(function(err, c) {
    			_males.push(c);
    			searchFemale(cb,pStart,pEnd,pOrganization,pReq,pRes);
@@ -120,8 +120,8 @@ var searchFemale = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pOrganization, 
 		gender:"female",
-		"created_at": {"$gte":pStart, "$lt":pEnd},
-		"birthday": {"$gte":_fromBirthday, "$lt":_endBirthday}}
+		"created_at": {"$gte":pStart.toISOString(), "$lt":pEnd.toISOString()},
+		"birthday": {"$gte":_fromBirthday.toISOString(), "$lt":_endBirthday.toISOString()}}
 		).exec(function(err, c) {
    			_females.push(c);
    			searchOthers(cb,pStart,pEnd,pOrganization,pReq,pRes);
@@ -146,7 +146,7 @@ var searchOthers = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pReq.query['organization'], 
 		gender: null,
-		"created_at": {"$gte":Date.parse(pReq.query['from']), "$lt":Date.parse(pReq.query['end'])},
+		"created_at": {"$gte":pReq.query['from'], "$lt":pReq.query['end']},
 		"birthday": {"$gte":_fromBirthday, "$lt":_endBirthday}}
 		).exec(function(err, c) {
    			_others.push(c);
@@ -173,7 +173,7 @@ var searchNoAgeMale= function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 	M_User.count({org_id_OnLive: pReq.query['organization'], 
 		gender: "male",
 		birthday:null,
-		"created_at": {"$gte":Date.parse(pReq.query['from']), "$lt":Date.parse(pReq.query['end'])}}
+		"created_at": {"$gte":pReq.query['from'], "$lt":pReq.query['end']}}
 		).exec(function(err, c) {
    			_males.unshift(c);
    			searchNoAgeFemale(cb,pStart,pEnd,pOrganization,pReq,pRes);
@@ -198,7 +198,7 @@ var searchNoAgeFemale= function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 	M_User.count({org_id_OnLive: pReq.query['organization'], 
 		gender: "female",
 		birthday:null,
-		"created_at": {"$gte":Date.parse(pReq.query['from']), "$lt":Date.parse(pReq.query['end'])}}
+		"created_at": {"$gte":pReq.query['from'], "$lt":pReq.query['end']}}
 		).exec(function(err, c) {
    			_females.unshift(c);
    			cb(pReq,pRes);
