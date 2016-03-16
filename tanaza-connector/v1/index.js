@@ -119,7 +119,7 @@ var registerLogin = function(pJsonBody)
 							location:_JsonLogin["client"]["location"],
 							location_latitude:_JsonLogin["client"]["location_latitude"],
 							location_longitude:_JsonLogin["client"]["location_longitude"],
-							created_at:_JsonLogin["client"]["created_at"],
+							created_at:new Date(_JsonLogin["client"]["created_at"]),
 							gender:_JsonLogin["client"]["gender"],
 							city:_JsonLogin["client"]["city"],
 							country:_JsonLogin["client"]["country"],
@@ -127,10 +127,10 @@ var registerLogin = function(pJsonBody)
 							picture:_JsonLogin["client"]["picture"],
 							logins_count:_JsonLogin["client"]["logins_count"],
 							provider:getTanazaLoginProviderName(_JsonLogin["client"]["provider"]),
-							birthday:_JsonLogin["client"]["birthday"],
+							birthday:new Date(_JsonLogin["client"]["birthday"]),
 							phone:_JsonLogin["client"]["phone"],
 							client_mac:_JsonLogin["client"]["client_mac"],
-							last_time_seen:_JsonLogin["client"]["last_time_seen"],
+							last_time_seen:new Date(_JsonLogin["client"]["last_time_seen"]),
 							org_id_OnLive:_org_id
 						});
 						_user.save(function(err) {
@@ -154,7 +154,7 @@ var registerLogin = function(pJsonBody)
 					ap_id:_JsonLogin["ap_id"],
 					ip_address:_JsonLogin["ip_address"],
 					client_mac:_JsonLogin["client_mac"],
-					created_at:_JsonLogin["created_at"],
+					created_at:new Date(_JsonLogin["created_at"]),
 					provider:getTanazaLoginProviderName(_JsonLogin["provider"]),
 					registration:_JsonLogin["registration"],
 					user_agent:_JsonLogin["user_agent"],
@@ -172,7 +172,7 @@ var registerLogin = function(pJsonBody)
 							location:_JsonLogin["client"]["location"],
 							location_latitude:_JsonLogin["client"]["location_latitude"],
 							location_longitude:_JsonLogin["client"]["location_longitude"],
-							created_at:_JsonLogin["client"]["created_at"],
+							created_at:new Date(_JsonLogin["client"]["created_at"]),
 							gender:_JsonLogin["client"]["gender"],
 							city:_JsonLogin["client"]["city"],
 							country:_JsonLogin["client"]["country"],
@@ -180,10 +180,10 @@ var registerLogin = function(pJsonBody)
 							picture:_JsonLogin["client"]["picture"],
 							logins_count:_JsonLogin["client"]["logins_count"],
 							provider:getTanazaLoginProviderName(_JsonLogin["client"]["provider"]),
-							birthday:_JsonLogin["client"]["birthday"],
+							birthday:new Date(_JsonLogin["client"]["birthday"]),
 							phone:_JsonLogin["client"]["phone"],
 							client_mac:_JsonLogin["client"]["client_mac"],
-							last_time_seen:_JsonLogin["client"]["last_time_seen"]
+							last_time_seen:new Date(_JsonLogin["client"]["last_time_seen"])
 						}
 					});
 					

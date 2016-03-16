@@ -11,7 +11,7 @@ var userSchema = new Schema({
 		location:String,
 		location_latitude:String,
 		location_longitude:String,
-		created_at:String,
+		created_at:Date,
 		gender:String,
 		city:String,
 		country:String,
@@ -19,10 +19,10 @@ var userSchema = new Schema({
 		picture:String,
 		logins_count:{type: Number},
 		provider:String,
-		birthday:String,
+		birthday:Date,
 		phone:String,
 		client_mac:String,
-		last_time_seen:String,
+		last_time_seen:Date,
 		org_id_OnLive: String
 });
 
@@ -35,7 +35,7 @@ userSchema.methods.UpdateUser = function UpdateUser(pUser)
 	this.location=pUser['location'];
 	this.location_latitude=pUser['location_latitude'];
 	this.location_longitude=pUser['location_longitude'];
-	this.created_at=pUser['created_at'];
+	this.created_at=new Date(pUser['created_at']);
 	this.gender=pUser['gender'];
 	this.city=pUser['city'];
 	this.country=pUser['country'];
@@ -43,10 +43,10 @@ userSchema.methods.UpdateUser = function UpdateUser(pUser)
 	this.picture=pUser['picture'];
 	this.logins_count=pUser['logins_count'];
 	this.provider=getTanazaLoginProviderName(pUser['provider']);
-	this.birthday=pUser['birthday'];
+	this.birthday=new Date(pUser['birthday']);
 	this.phone=pUser['phone'];
 	this.client_mac=pUser['client_mac'];
-	this.last_time_seen=pUser['last_time_seen'];
+	this.last_time_seen=new Date(pUser['last_time_seen']);
 	this.save();
 }
 

@@ -7,7 +7,7 @@ var loginSchema = new Schema({
 	ap_id:String,
 	ip_address:String,
 	client_mac:String,
-	created_at:String,
+	created_at:Date,
 	user_agent:String,
 	provider:String,
 	registration: Boolean,
@@ -25,7 +25,7 @@ var loginSchema = new Schema({
 		location:String,
 		location_latitude:String,
 		location_longitude:String,
-		created_at:String,
+		created_at:Date,
 		gender:String,
 		city:String,
 		country:String,
@@ -33,10 +33,10 @@ var loginSchema = new Schema({
 		picture:String,
 		logins_count:{type: Number},
 		provider:String,
-		birthday:String,
+		birthday:Date,
 		phone:String,
 		client_mac:String,
-		last_time_seen:String
+		last_time_seen:Date
 	}
 });
 
