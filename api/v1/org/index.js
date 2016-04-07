@@ -39,7 +39,7 @@ un json con la informacion necesaria para registrar una empresa.
 E_App.post('/', function(pReq, pRes) {
 	pReq.on('data', function (chunk) {
 		var jsonbody = JSON.parse(chunk);
-		registerOrganization(jsonbody["NameOrganization"]);
+		registerOrganization(jsonbody["NameOrganization"],jsonbody["rangeAge"]);
 	});
 	pReq.on('end', function () {
 		pRes.writeHead(200, "OK", {'Content-Type': 'text/hmtl'});
@@ -276,10 +276,11 @@ Paramteros: pName: Nombre de la organizacion.
 Decripcion:
 Se agrega una nueva organizacion.
 -----------------------------------------------------------------------*/
-function registerOrganization(pName)
+function registerOrganization(pName,pRangeAge)
 {
 	var organization = new M_Organization({
 		name: pName,
+		rangeAge:pRangeAge,
 		active: true
 	});
 

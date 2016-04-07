@@ -11,13 +11,14 @@ var E_Express = require('express');
 var E_Express = require('express');
 var E_App = module.exports = E_Express();
 var M_Login = require('../../../../model/login')
-
+var moment = require('moment');
 
 var _filtersName;
 var _counterWeek;
 var _counterDay;
 var _counterBuilder;
 var _arrayResult;
+
 
 
 /*----------------------------------------------------------------------
@@ -61,8 +62,12 @@ var searchDay = function(pReq,pRes,cb)
 {
 	if(_counterDay < 7)
 	{
-		var _dateStart = new Date (Date.parse(pReq.query['from']) - ((7*_counterWeek)-_counterDay)*24*3600*1000);
-		var _dateEnd = new Date (Date.parse(pReq.query['from']) - ((7*_counterWeek)-(_counterDay+1))*24*3600*1000);
+		var _dateStart = moment(pReq.query['from']);
+		var _dateEnd = moment(pReq.query['from']);
+		_dateStart =_dateStart.add(_counterDay,'day');
+		_dateStart =_dateStart.subtract(_counterWeek,'week');
+		_dateEnd =_dateEnd.add(_counterDay+1,'day');
+		_dateEnd =_dateEnd.subtract(_counterWeek,'week');
 		var _organization =  pReq.query['organization'];
 		searchCounterUser(pReq,pRes,_dateStart,_dateEnd,_organization,searchDay,cb);
 		
@@ -77,7 +82,7 @@ var searchDay = function(pReq,pRes,cb)
 var searchCounterUser = function(pReq,pRes,pDateStart,pDateEnd,pOrganization,cb,cbSearch)
 {
 	M_Login.distinct("client.id",{"org_id_OnLive":pOrganization,"created_at": 
-		{"$gte":pDateStart.toISOString(),"$lte":pDateEnd.toISOString()}}).exec(function(err, c) {
+		{"$gte":pDateStart,"$lte":pDateEnd}}).exec(function(err, c) {
 		_arrayResult.push(c.length);
 		_counterDay++;
 		cb(pReq,pRes,cbSearch);

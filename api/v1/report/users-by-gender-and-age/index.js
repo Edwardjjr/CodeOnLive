@@ -8,7 +8,9 @@ Modelo de base de datos: Sus nombres se trabajan con una M_
 -----------------------------------------------------------------------*/
 var E_Express = require('express');
 var E_App = module.exports = E_Express();
-var M_User = require('../../../../model/user')
+var M_User = require('../../../../model/user');
+var M_Organization = require('../../../../model/organization');
+var E_Moment = require('moment');
 
 var _ages;
 var _males;
@@ -34,20 +36,27 @@ este es inicializado con la estructura, luego se agregara las filas
 correspondientes.
 -----------------------------------------------------------------------*/
 E_App.get('/', function(pReq, pRes) {
-	_response = [["Range","Hombres","Mujeres", "Género ND"]];
-	_ages = [0,17,29,39,49,59,150];
+	//_ages = [0,18,24,34,45,54,150];
+	initVariable(pReq,pRes);
+});
+
+var initVariable = function(pReq,pRes)
+{
 	_males= [];
 	_females= [];
-	_others = [0];
+	_others = [];
 	_counter = 0;
+	_filtersName =["0-18","19-29","30-39","40-49","50-59","60+","ND"];
 	_response = [["Por edad","Hombres","Mujeres", "Género ND"]];
-	_filtersName =["ND","17-","18-29","30-39","40-49","50-59","60+"]
 	_counterBulider = 0;
-	date = new Date();
 	_endBirthday = null;
 	_fromBirthday = null;
-	searchdate(pReq,pRes);
-});
+	var _organization =  pReq.query['organization'];
+	M_Organization.findOne({"_id":_organization}).exec(function(err, result) {
+		_ages = result["rangeAge"];
+		searchdate(pReq,pRes);
+	});	
+}
 
 
 /*----------------------------------------------------------------------
@@ -61,14 +70,14 @@ formar la table para los ggrafcos de google charts.
 -----------------------------------------------------------------------*/
 var searchdate = function(pReq,pRes)
 {
-	var _start = Date.parse(pReq.query['from']);
-	var _end = Date.parse(pReq.query['end']);
+	var _start = E_Moment(pReq.query['from']);
+	var _end = E_Moment(pReq.query['end']);
 	var _organization =  pReq.query['organization'];
 
 	if(_counter < (_ages.length - 1))
 	{
-		_endBirthday = new Date(date - _ages[_counter] * 24 * 3600 * 1000*365);
-		_fromBirthday = new Date(date - _ages[_counter +1] * 24 * 3600 * 1000*365);
+		_endBirthday = E_Moment().subtract(_ages[_counter],'year');
+		_fromBirthday = E_Moment().subtract(_ages[_counter +1],'year');
 		searchMale(searchdate,_start,_end,_organization,pReq,pRes);
 		_counter++;
 	}
@@ -94,8 +103,8 @@ var searchMale = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pOrganization, 
 		gender:"male",
-		"created_at": {"$gte":pStart.toISOString(), "$lt":pEnd.toISOString()},
-		"birthday": {"$gte":_fromBirthday.toISOString(), "$lt":_endBirthday.toISOString()}}
+		"created_at": {"$gte":pStart, "$lt":pEnd},
+		"birthday": {"$gte":_fromBirthday, "$lt":_endBirthday}}
 		).exec(function(err, c) {
    			_males.push(c);
    			searchFemale(cb,pStart,pEnd,pOrganization,pReq,pRes);
@@ -120,8 +129,8 @@ var searchFemale = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pOrganization, 
 		gender:"female",
-		"created_at": {"$gte":pStart.toISOString(), "$lt":pEnd.toISOString()},
-		"birthday": {"$gte":_fromBirthday.toISOString(), "$lt":_endBirthday.toISOString()}}
+		"created_at": {"$gte":pStart, "$lt":pEnd},
+		"birthday": {"$gte":_fromBirthday, "$lt":_endBirthday}}
 		).exec(function(err, c) {
    			_females.push(c);
    			searchOthers(cb,pStart,pEnd,pOrganization,pReq,pRes);
@@ -146,7 +155,7 @@ var searchOthers = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 {
 	M_User.count({org_id_OnLive: pReq.query['organization'], 
 		gender: null,
-		"created_at": {"$gte":pReq.query['from'], "$lt":pReq.query['end']},
+		"created_at": {"$gte":E_Moment(pReq.query['from']), "$lt":E_Moment(pReq.query['end'])},
 		"birthday": {"$gte":_fromBirthday, "$lt":_endBirthday}}
 		).exec(function(err, c) {
    			_others.push(c);
@@ -173,9 +182,9 @@ var searchNoAgeMale= function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 	M_User.count({org_id_OnLive: pReq.query['organization'], 
 		gender: "male",
 		birthday:null,
-		"created_at": {"$gte":pReq.query['from'], "$lt":pReq.query['end']}}
+		"created_at": {"$gte":E_Moment(pReq.query['from']), "$lt":E_Moment(pReq.query['end'])}}
 		).exec(function(err, c) {
-   			_males.unshift(c);
+   			_males.push(c);
    			searchNoAgeFemale(cb,pStart,pEnd,pOrganization,pReq,pRes);
 		}
 	);
@@ -198,14 +207,27 @@ var searchNoAgeFemale= function(cb,pStart,pEnd,pOrganization,pReq,pRes)
 	M_User.count({org_id_OnLive: pReq.query['organization'], 
 		gender: "female",
 		birthday:null,
-		"created_at": {"$gte":pReq.query['from'], "$lt":pReq.query['end']}}
+		"created_at": {"$gte":E_Moment(pReq.query['from']), "$lt":E_Moment(pReq.query['end'])}}
 		).exec(function(err, c) {
-   			_females.unshift(c);
-   			cb(pReq,pRes);
+   			_females.push(c);
+   			searchNoAgeNoGender(cb,pStart,pEnd,pOrganization,pReq,pRes);
 		}
 	);
 }
 
+
+var searchNoAgeNoGender= function(cb,pStart,pEnd,pOrganization,pReq,pRes)
+{
+	M_User.count({org_id_OnLive: pReq.query['organization'], 
+		gender: null,
+		birthday:null,
+		"created_at": {"$gte":E_Moment(pReq.query['from']), "$lt":E_Moment(pReq.query['end'])}}
+		).exec(function(err, c) {
+   			_others.push(c);
+   			cb(pReq,pRes);
+		}
+	);
+}
 /*----------------------------------------------------------------------
 Paramteros: pReq: request.
             pRes: response.

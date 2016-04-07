@@ -10,12 +10,14 @@ var E_Express = require('express');
 
 var E_Express = require('express');
 var E_App = module.exports = E_Express();
-var M_Login = require('../../../../model/login')
+var M_Login = require('../../../../model/login');
+var M_Organization = require('../../../../model/organization');
+var E_Moment = require('moment');
 
 var NUMBER_OF_WEEK = 4;
 var PAST_WEEK= 2;
 var ACTIVE = 1;
-var NUMBER_OF_HOURS = 24;
+
 var NUMBER_OF_MILISEGUNDOS_BY_HOURS = 3600000;
 var NUMBER_OF_MILISEGUNDOS_BY_DAY = 86400000;
 var _counterHours;
@@ -26,6 +28,9 @@ var _counterWeek;
 var _counterBuilder;
 var _response;
 var _arrayResult;
+var _hourEnd;
+var _numberOfHours; 
+var _initHour;
 
 /*----------------------------------------------------------------------
 Paramteros: pReq: request.
@@ -37,14 +42,26 @@ la semana.
 -----------------------------------------------------------------------*/
 
 E_App.get('/', function(pReq, pRes) {
-	_counterHours = 0;
+	initVariable(pReq,pRes);
+	
+});
+
+var initVariable = function(pReq,pRes)
+{
 	_counterWeek = 0;
 	_counterBuilder = 0;
 	_response = [];
 	_arrayResult= [];
-	search(pReq,pRes);
+	M_Organization.findOne({"_id":pReq.query['organization']}).exec(function(err,result)
+	{
+		_initHour = result["rangeHours"][0];
+		_counterHours = result["rangeHours"][0];
+		_hourEnd = result["rangeHours"][1];
+		_numberOfHours = _hourEnd - _counterHours;
+		search(pReq,pRes);
+	});
 	
-});
+}
 
 var searchWeek = function(pReq,pRes)
 {
@@ -64,7 +81,7 @@ var searchWeek = function(pReq,pRes)
 	{
 		if(pReq.query['pastWeek']==ACTIVE)
 		{
-			if(_counterWeek < PAST_WEEK)
+			if(_counterWeek < NUMBER_OF_WEEK)
 			{
 				_counterHours = 0;
 				search(pReq,pRes);
@@ -84,13 +101,17 @@ var searchWeek = function(pReq,pRes)
 var search = function(pReq,pRes)
 {
 	var _organization =  pReq.query['organization'];
-	var _dateStart =  new Date (Date.parse(pReq.query['from']) - (24-_counterHours)*NUMBER_OF_MILISEGUNDOS_BY_HOURS 
-															 -7*_counterWeek*NUMBER_OF_MILISEGUNDOS_BY_DAY);
-	var _dateEnd = new Date (Date.parse(pReq.query['from']) - (23-_counterHours)*NUMBER_OF_MILISEGUNDOS_BY_HOURS
-														  -7*_counterWeek*NUMBER_OF_MILISEGUNDOS_BY_DAY);
-	if(_counterHours < NUMBER_OF_HOURS)
+	var _dateStart = E_Moment(pReq.query['from']);
+	var _dateEnd = E_Moment(pReq.query['from']);
+	_dateStart = _dateStart.add(_counterHours,'hour');
+	_dateStart = _dateStart.subtract(_counterWeek,'week');
+	_dateEnd = _dateEnd.add(_counterHours+1,'hour');
+	_dateEnd = _dateEnd.subtract(_counterWeek,'week');
+	_dateStart =  new Date (_dateStart);
+	_dateEnd = new Date (_dateEnd);
+	if(_counterHours <= _hourEnd)
 	{
-		if(pReq.query['idVenue'] != null)
+		if(pReq.query['idVenue'] != "null")
 		{
 			searchUserHoursVenue(pReq,pRes,_counterHours,_organization,_dateStart,_dateEnd,search);
 		}
@@ -117,8 +138,8 @@ var searchUserHoursOrganizacion = function(pReq,pRes,pOrganization,pDateStart,pD
 				idClient:'$client.id',
 				org_id_OnLive:1,
 				created_at:1,
-				hourStart: { $gt: [ "$created_at", pDateStart.toISOString() ] },
-				hourEnd: { $lt: [ "$created_at", pDateEnd.toISOString() ] }
+				hourStart: { $gt: [ "$created_at", pDateStart ] },
+				hourEnd: { $lt: [ "$created_at", pDateEnd ] }
 		}},
 
 		{$match: {'org_id_OnLive' : pOrganization, 'hourStart':true,'hourEnd':true}},
@@ -136,17 +157,17 @@ var searchUserHoursOrganizacion = function(pReq,pRes,pOrganization,pDateStart,pD
 
 var searchUserHoursVenue = function(pReq,pRes,pHours,pOrganization,pDateStart,pDateEnd,cb)
 {
-	var a = M_Login.aggregate([
+	M_Login.aggregate([
 		{
 			$project:{
 				_id:1,
 				idClient:'$client.id',
 				org_id_OnLive:1,
+				venue_id_OnLive:1,
 				created_at:1,
-				hourStart: { $gt: [ "$created_at", pDateStart.toISOString() ] },
-				hourEnd: { $lt: [ "$created_at", pDateEnd.toISOString() ] }
+				hourStart: { $gt: [ "$created_at", pDateStart ] },
+				hourEnd: { $lt: [ "$created_at", pDateEnd ] }
 		}},
-
 		{$match: { 'org_id_OnLive' : pOrganization, 'venue_id_OnLive':pReq.query['idVenue'],'hourStart':true,'hourEnd':true}},
 		{$group:{_id: "$idClient",firstSalesDate: { $first: "$idClient" }}}
 		],function (err, result) {
@@ -170,26 +191,23 @@ por google chart para generar un grafico.
 -----------------------------------------------------------------------*/
 var CreateTable = function(pReq,pRes)
 {
-	if(_counterBuilder < _filtersName.length)
+	if(_counterBuilder <= _numberOfHours)
 	{
 		Insetar(pReq,pRes,CreateTable);
 	}
 	else
 	{
 		var _headLine =[];
+		_headLine.push(_tittle[0]);
+		_headLine.push(_tittle[1]);
 		if(pReq.query['pastWeek']==ACTIVE)
 		{
-			_headLine.push(_tittle[0]);
-			_headLine.push(_tittle[1]);
+			_headLine.push(_tittle[2]);
 		}
 	
 		if(pReq.query['pastFourWeek']==ACTIVE)
 		{
-			_headLine = _tittle;
-		}
-		else
-		{
-			_headLine.push(_tittle[0]);
+			_headLine.push(_tittle[3]);
 		}
 		
 		_response.unshift(_headLine);
@@ -210,16 +228,16 @@ respuesta.
 -----------------------------------------------------------------------*/
 var Insetar= function(pReq,pRes,cb)
 {
-	var _row = [_filtersName[_counterBuilder]];
+	var _row = [_filtersName[_counterBuilder+_initHour]];
 	_row.push(_arrayResult[_counterBuilder]);
 	if(pReq.query['pastWeek']==ACTIVE)
 	{
-		_row.push(_arrayResult[_counterBuilder+NUMBER_OF_HOURS]);
+		_row.push(_arrayResult[_counterBuilder+_numberOfHours]);
 	}
 	if(pReq.query['pastFourWeek']==ACTIVE)
 	{
-		var _averague = (_arrayResult[_counterBuilder]+_arrayResult[_counterBuilder+NUMBER_OF_HOURS]+
-		_arrayResult[_counterBuilder+2*NUMBER_OF_HOURS]*_arrayResult[_counterBuilder+3*NUMBER_OF_HOURS])/NUMBER_OF_WEEK;
+		var _averague = (_arrayResult[_counterBuilder]+_arrayResult[_counterBuilder+_numberOfHours]+
+		_arrayResult[_counterBuilder+2*_numberOfHours]*_arrayResult[_counterBuilder+3*_numberOfHours])/NUMBER_OF_WEEK;
 		_row.push(_averague)
 	}
 

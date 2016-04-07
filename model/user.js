@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var moment = require('moment');
 
 
 var userSchema = new Schema({
@@ -29,13 +30,22 @@ var userSchema = new Schema({
 
 userSchema.methods.UpdateUser = function UpdateUser(pUser)
 {
+	if(pUser["birthday"] == null)
+	{
+		birthday = null;
+	}
+	else
+	{
+		birthday = moment(pUser["birthday"]).subtract(6,"hours"); 
+		
+	}
 	this.email=pUser['email'];
 	this.first_name = pUser['first_name'];
 	this.last_name=pUser['last_name'];
 	this.location=pUser['location'];
 	this.location_latitude=pUser['location_latitude'];
 	this.location_longitude=pUser['location_longitude'];
-	this.created_at=new Date(pUser['created_at']);
+	this.created_at=moment(pUser['created_at']).subtract(6,"hours");
 	this.gender=pUser['gender'];
 	this.city=pUser['city'];
 	this.country=pUser['country'];
@@ -43,13 +53,54 @@ userSchema.methods.UpdateUser = function UpdateUser(pUser)
 	this.picture=pUser['picture'];
 	this.logins_count=pUser['logins_count'];
 	this.provider=getTanazaLoginProviderName(pUser['provider']);
-	this.birthday=new Date(pUser['birthday']);
+	this.birthday=moment(pUser['birthday']).subtract(6,"hours");
 	this.phone=pUser['phone'];
 	this.client_mac=pUser['client_mac'];
-	this.last_time_seen=new Date(pUser['last_time_seen']);
+	this.last_time_seen=moment(pUser['last_time_seen']);
 	this.save();
 }
-
+userSchema.methods.UpdateUserCsv = function UpdateUser(pUser)
+{
+	var birthday;
+	var gender;
+	if(pUser["birthday"] === '')
+	{
+		birthday = null;
+	}
+	else
+	{
+		birthday = moment(pUser["birthday"]); 
+		
+	}
+	if(pUser["gender"] === '')
+	{
+		gender = null;
+	}
+	else
+	{
+		var gender =pUser["gender"]; 
+		
+	}
+	this.email=pUser['email'];
+	this.first_name = pUser['first name'];
+	this.last_name=pUser['last name'];
+	this.location=pUser['location'];
+	this.location_latitude=pUser['location_latitude'];
+	this.location_longitude=pUser['location_longitude'];
+	this.created_at=new Date(pUser['registered_at']);
+	this.gender=gender;
+	this.city=pUser['city'];
+	this.country=pUser['country'];
+	this.country_code=pUser['country_code'];
+	this.picture=pUser['picture'];
+	this.logins_count=pUser['connections_count'];
+	this.provider=getTanazaLoginProviderName(parseInt(pUser['provider']));
+	this.birthday=birthday;
+	this.phone=pUser['phone'];
+	this.client_mac=pUser['client_mac'];
+	this.last_time_seen=new Date(pUser['last_login']);
+	this.save();
+}
 
 
 var getTanazaLoginProviderName = function (pProviderId) {

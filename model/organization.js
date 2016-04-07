@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 var OrganizationSchema = new Schema(
 {
 	name: String,
+	rangeAge: Array,
+	rangeHours:Array,
 	active: Boolean
 });
 

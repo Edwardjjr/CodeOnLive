@@ -17,6 +17,7 @@ var E_mongoose = require('mongoose');
 var E_Jwt = require('jsonwebtoken');
 var I_Client = require('./api/v1/client/index.js');
 var I_OnLiveLogger = require('./common/onLiveLogger/index.js');
+var formidable = require('express-formidable');
 
 
 /*----------------------------------------------------------------------
@@ -24,7 +25,8 @@ Decripcion:
 Esto permite que las solicitudes recibidas sean decodificadas para que }
 trabajen con la libreria express.
 -----------------------------------------------------------------------*/
-E_App.use(E_BodyParser.urlencoded());
+//E_App.use(E_BodyParser.urlencoded());
+E_App.use(formidable.parse());
 
 
 /*----------------------------------------------------------------------

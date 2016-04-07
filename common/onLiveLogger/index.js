@@ -12,7 +12,6 @@ var E_Papertrail = require('winston-papertrail').Papertrail;
 var E_Nconf = require ('nconf');
 
 
-
 /*----------------------------------------------------------------------
 Paramteros: Los mismo son tomados del archivo de configuracion del 
 sistema.
@@ -25,6 +24,7 @@ valor asi va a ser el nivel de detalle del programa
 -----------------------------------------------------------------------*/
 
 var _fileLogger = new E_Winston.transports.File({
+            maxListeners: 0,
             level: E_Nconf.get('ConfiOnLiveLoggerConnector:level'),
             filename: E_Nconf.get('ConfiOnLiveLoggerConnector:file'),
             handleExceptions: true,
@@ -94,6 +94,7 @@ _ptTransport.on('connect', function(message) {
     _logger && _logger.debug(message);
 });
 
+
 var _logger = new E_Winston.Logger({
     transports: [
         _ptTransport,
@@ -133,7 +134,5 @@ module.exports = {
         default:
             _logger.debug(pMessage);
         }
-        
     }
-
 };
