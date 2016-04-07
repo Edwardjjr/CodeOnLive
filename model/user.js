@@ -45,7 +45,7 @@ userSchema.methods.UpdateUser = function UpdateUser(pUser)
 	this.location=pUser['location'];
 	this.location_latitude=pUser['location_latitude'];
 	this.location_longitude=pUser['location_longitude'];
-	this.created_at=moment(pUser['created_at'])subtract(6,"hours");
+	this.created_at=moment(pUser['created_at']).subtract(6,"hours");
 	this.gender=pUser['gender'];
 	this.city=pUser['city'];
 	this.country=pUser['country'];
@@ -56,7 +56,7 @@ userSchema.methods.UpdateUser = function UpdateUser(pUser)
 	this.birthday=moment(pUser['birthday']);
 	this.phone=pUser['phone'];
 	this.client_mac=pUser['client_mac'];
-	this.last_time_seen=moment(pUser['last_time_seen'])subtract(6,"hours");
+	this.last_time_seen=moment(pUser['last_time_seen']).subtract(6,"hours");
 	this.save();
 }
 userSchema.methods.UpdateUserCsv = function UpdateUser(pUser)
