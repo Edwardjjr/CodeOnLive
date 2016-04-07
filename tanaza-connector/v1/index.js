@@ -139,7 +139,7 @@ var registerLogin = function(pJsonBody)
 							birthday:birthday,
 							phone:_JsonLogin["client"]["phone"],
 							client_mac:_JsonLogin["client"]["client_mac"],
-							last_time_seen:moment(_JsonLogin["client"]["last_time_seen"]),subtract(6,"hours"),
+							last_time_seen:moment(_JsonLogin["client"]["last_time_seen"]).subtract(6,"hours"),
 							org_id_OnLive:_org_id
 						});
 						_user.save(function(err) {
