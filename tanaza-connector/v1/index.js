@@ -102,7 +102,7 @@ var registerLogin = function(pJsonBody)
 				}
 				else
 				{
-					birthday = moment(_JsonLogin["client"]["birthday"]).subtract(6,"hours"); 
+					birthday = moment(_JsonLogin["client"]["birthday"]); 
 				}
 				if(results != null)
 				{

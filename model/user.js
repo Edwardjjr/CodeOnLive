@@ -36,7 +36,7 @@ userSchema.methods.UpdateUser = function UpdateUser(pUser)
 	}
 	else
 	{
-		birthday = moment(pUser["birthday"]).subtract(6,"hours"); 
+		birthday = moment(pUser["birthday"]); 
 		
 	}
 	this.email=pUser['email'];
