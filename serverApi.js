@@ -57,7 +57,7 @@ Metodo de prueba para ver como tomar el token recibido paar verificar la
 autorizacion del usuraio.
 -----------------------------------------------------------------------*/
 
-/*E_App.use('/api',function(pReq, pRes,pNext) {
+E_App.use('/api',function(pReq, pRes,pNext) {
     E_Jwt.verify(pReq.headers['accept'], 'prueba', function(err, decoded) {
       if(err)
       {
@@ -69,7 +69,7 @@ autorizacion del usuraio.
         pNext();
       }
     });
-});*/
+});
 
 /*----------------------------------------------------------------------
 Decripcion:

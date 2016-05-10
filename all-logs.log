@@ -103,3 +103,10 @@
 {"level":"info","message":"Se actualizo el usuario 2081161 el campo last_time_seen: Anterior: Wed Sep 09 2015 12:03:26 GMT-0600 (Central America Standard Time) Actual: 2015-09-09T18:03:26.917Z","timestamp":"2016-04-07T00:05:11.941Z"}
 {"level":"info","message":"Create Login 7453201","timestamp":"2016-04-07T00:05:12.000Z"}
 {"level":"info","message":"Proccess Login: 7453201","timestamp":"2016-04-07T00:05:12.012Z"}
+{"level":"debug","message":"Connected to Papertrail at logs3.papertrailapp.com:23794","timestamp":"2016-04-07T00:49:01.049Z"}
+{"level":"info","message":"recevid login: 7453201","timestamp":"2016-04-07T00:49:34.226Z"}
+{"level":"warn","message":"Se reciben datos de un Ap no registrado00193BA88468","timestamp":"2016-04-07T00:49:34.305Z"}
+{"level":"info","message":"Se actualizo el usuario 2081161 el campo created_at: Anterior: Mon Sep 07 2015 09:30:08 GMT-0600 (Central America Standard Time) Actual: 2015-09-07T15:30:08.398Z","timestamp":"2016-04-07T00:49:34.331Z"}
+{"level":"info","message":"Se actualizo el usuario 2081161 el campo last_time_seen: Anterior: Wed Sep 09 2015 12:03:26 GMT-0600 (Central America Standard Time) Actual: 2015-09-09T18:03:26.917Z","timestamp":"2016-04-07T00:49:34.340Z"}
+{"level":"info","message":"Create Login 7453201","timestamp":"2016-04-07T00:49:34.382Z"}
+{"level":"info","message":"Proccess Login: 7453201","timestamp":"2016-04-07T00:49:34.395Z"}
