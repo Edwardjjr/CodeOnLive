@@ -141,6 +141,7 @@ var registerLogin = function(pJsonBody)
 							client_mac:_JsonLogin["client"]["client_mac"],
 							last_time_seen:moment(_JsonLogin["client"]["last_time_seen"]),
 							org_id_OnLive:_org_id
+							
 						});
 						_user.save(function(err) {
 							if (err)
@@ -152,10 +153,11 @@ var registerLogin = function(pJsonBody)
 								I_OnLiveLogger.SendMessage('Create user '+_JsonLogin["client"]["id"], 'info');
 							}
 						});
+						_user.venues_OnLive.push({idVenue:_venue_id,count:1});
 					}
 					else
 					{
-						UpdateUser(_JsonLogin["client"],results)
+						UpdateUser(_JsonLogin["client"],results,_venue_id)
 					}
 
 					var _login = new M_Login({
@@ -228,7 +230,7 @@ Actualiza los datos de usuario registrado en la base de datos he informa
 de los cambios.
 -----------------------------------------------------------------------*/
 
-var UpdateUser = function(pUser, pUserDataBase)
+var UpdateUser = function(pUser, pUserDataBase,pIdVenue)
 {	
 	var _fields=["email","first_name","last_name","picture","location","location_latitude",
 	"location_longitude","created_at","gender","city","country","country_code","picture",
@@ -253,7 +255,7 @@ var UpdateUser = function(pUser, pUserDataBase)
 			}
 			if(_counterField == (_fields.length-1))
 			{
-				pUserDataBase.UpdateUser(pUser);
+				pUserDataBase.UpdateUser(pUser,pIdVenue);
 			}
 		}
 	}
@@ -295,5 +297,6 @@ var getTanazaLoginProviderName = function (pProviderId) {
 			return "unknown";
 	}
 }
+
 
 module.exports.registerLogin = registerLogin

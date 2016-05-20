@@ -73,12 +73,13 @@ var searchdate = function(pReq,pRes)
 	var _start = E_Moment(pReq.query['from']);
 	var _end = E_Moment(pReq.query['end']);
 	var _organization =  pReq.query['organization'];
+	var _venue = pReq.query['venue'];
 
 	if(_counter < (_ages.length - 1))
 	{
 		_endBirthday = E_Moment().subtract(_ages[_counter],'year');
 		_fromBirthday = E_Moment().subtract(_ages[_counter +1],'year');
-		searchMale(searchdate,_start,_end,_organization,pReq,pRes);
+		searchMale(searchdate,_start,_end,_organization,_venue,pReq,pRes);
 		_counter++;
 	}
 	else
@@ -99,17 +100,23 @@ Decripcion:
 Realiza la busqueda de usuarios por un rengo de fecha(por dia) y su genero 
 sea hombres y los calsifica por un rango de edad.
 -----------------------------------------------------------------------*/
-var searchMale = function(cb,pStart,pEnd,pOrganization,pReq,pRes)
+var searchMale = function(cb,pStart,pEnd,pOrganization,pVenue,pReq,pRes)
 {
-	M_User.count({org_id_OnLive: pOrganization, 
-		gender:"male",
-		"created_at": {"$gte":pStart, "$lt":pEnd},
-		"birthday": {"$gte":_fromBirthday, "$lt":_endBirthday}}
-		).exec(function(err, c) {
-   			_males.push(c);
-   			searchFemale(cb,pStart,pEnd,pOrganization,pReq,pRes);
-		}
-	);
+	if(pVenue == null)
+	{
+		M_User.count({org_id_OnLive: pOrganization, 
+			gender:"male",
+			"created_at": {"$gte":pStart, "$lt":pEnd},
+			"birthday": {"$gte":_fromBirthday, "$lt":_endBirthday}}
+			).exec(function(err, c) {
+	   			_males.push(c);
+	   			searchFemale(cb,pStart,pEnd,pOrganization,pReq,pRes);
+			}
+		);
+	}
+	else
+	{
+	}
 };
 
 /*----------------------------------------------------------------------

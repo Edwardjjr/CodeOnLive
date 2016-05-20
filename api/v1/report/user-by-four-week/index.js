@@ -13,6 +13,11 @@ var E_App = module.exports = E_Express();
 var M_Login = require('../../../../model/login')
 var moment = require('moment');
 
+//var ACTIVE = 1;
+//var _oneWeek;
+//var _towWeek;
+//var _threeWeek;
+//var _averageWeek;
 var _filtersName;
 var _filtersHeaders;
 var _filtersDate;
@@ -42,7 +47,11 @@ E_App.get('/', function(pReq, pRes) {
 	_counterDay = 1;
 	_filtersName=[];
 	_filtersDate = [];
-	_filtersHeaders = ["Dia","3 Semanas atras","2 Semanas atras","Semana Anterior","Semana Actual", "Promedio"];
+	//_oneWeek = pReq.query["oneWeek"];
+	//_towWeek = pReq.query["twoWeek"];
+	//_threeWeek = pReq.query["threeWeek"];
+	//_averageWeek = pReq.query["averageWeek"];
+	_filtersHeaders = ["Dia","Promedio 4 semanas","3 semanas antes","2 semanas antes","1 semanas antes","Semana final"];
 	_arrayResult =[];
 	_responseUser = [];
 	search(pReq,pRes);
@@ -60,7 +69,6 @@ var search = function(pReq,pRes)
 	else
 	{
 		_counterBuilder = 0;
-		console.log(_filtersName);
 		CreateTable(pReq,pRes);
 	}
 }
@@ -123,14 +131,41 @@ var CreateTable = function(pReq,pRes)
 {
 	if(_counterBuilder < 7)
 	{
-		
 		Insetar(pReq,pRes,CreateTable);
 	}
 	else
 	{
-		_counterBuilder = 1;
-		_counterBuilderDate = 0;
-		CreateHeaders(pReq,pRes);
+		//console.log(_responseUser);
+		//var _rowPromedio = _responseUser.pop();
+		//console.log(_rowPromedio);
+		//_responseUser.unshift(_rowPromedio);
+		_responseUser.unshift(_filtersHeaders);
+		//console.log(_responseUser);
+		/*var _headers = [];
+		_headers.push(_filtersHeaders[0]);
+		_headers.push(_filtersHeaders[5]);
+		if(_oneWeek== ACTIVE)
+		{
+			_headers.push(_filtersHeaders[4]);
+		}
+		if(_towWeek== ACTIVE)
+		{
+			_headers.push(_filtersHeaders[3]);
+		}
+		if(_threeWeek== ACTIVE)
+		{
+			_headers.push(_filtersHeaders[2]);
+		}
+		if(_averageWeek == ACTIVE)
+		{
+			_headers.splice(1,0,_filtersHeaders[1]);
+		}*/
+		//_responseUser.unshift(_headers);
+		console.log(_responseUser);
+		pRes.send(_responseUser);
+		//_counterBuilder = 1;
+		//_counterBuilderDate = 0;
+		//CreateHeaders(pReq,pRes);
 	}
 	
 	
@@ -146,7 +181,7 @@ respuesta.
 -----------------------------------------------------------------------*/
 var Insetar= function(pReq,pRes,cb)
 {
-	var _row = [_filtersName[_counterBuilder]]
+	_row = [_filtersName[_counterBuilder]]
 	var _counter = 0;
 	var _average = 0;
 	while(_counter <= 4)
@@ -154,16 +189,41 @@ var Insetar= function(pReq,pRes,cb)
 
 		if(_counter == 4)
 		{
-			_row.push((_average/4));
-			_responseUser.push(_row);
-			_counterBuilder++;
-			cb(pReq,pRes);
-			break;
+			//if(_averageWeek == ACTIVE)
+			//{
+				_row.splice(1,0,(_average/4));
+				_responseUser.push(_row);
+				_counterBuilder++;
+				cb(pReq,pRes);
+			//}
+			//else
+			//{	
+			//	_responseUser.push(_row);
+			//	_counterBuilder++;
+			//	cb(pReq,pRes);
+			//}
+			
 		}
 		else
 		{
 			_average = _average + _arrayResult[(7*_counter)+_counterBuilder];
-			_row.push(_arrayResult[(7*_counter)+_counterBuilder]);
+			//if(_counter == 0)
+			//{
+			//	_row = [_filtersName[_counterBuilder]]
+				_row.push(_arrayResult[(7*_counter)+_counterBuilder]);
+			//}
+			/*if(_counter == 1 && _oneWeek== ACTIVE)
+			{
+				_row.push(_arrayResult[(7*_counter)+_counterBuilder]);
+			}
+			if(_counter == 2 && _towWeek== ACTIVE)
+			{
+				_row.push(_arrayResult[(7*_counter)+_counterBuilder]);
+			}
+			if((_counter == 3)&&(_threeWeek== ACTIVE))
+			{
+				_row.push(_arrayResult[(7*_counter)+_counterBuilder]);
+			}*/
 			_counter++;
 		}
 	}
@@ -208,6 +268,8 @@ var CreateHeaders = function (pReq,pRes)
 	else
 	{
 		_responseUser.unshift(_filtersHeaders);
+		var _rowPromedio = _responseUser.pop();
+		_responseUser.splice(1,0,_responseUser);
 		pRes.send(_responseUser);
 	}
 }

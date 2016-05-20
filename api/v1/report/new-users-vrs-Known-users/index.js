@@ -22,6 +22,8 @@ var _counter;
 var _counterBulider;
 var _counterLoop;
 var _counterUser;
+var _promedioNew;
+var _promedioKnow;
 
 
 /*----------------------------------------------------------------------
@@ -40,14 +42,17 @@ E_App.get('/', function(pReq, pRes) {
 	var _start = moment(pReq.query['from']);
 	var _end = moment(pReq.query['end']);
 	var _organization =  pReq.query['organization'];
-	var _days = (_end-_start)/MILISECONDSFORDAY;
+	var _days = ((_end-_start)/MILISECONDSFORDAY)-1;
 	_counter = _days;
 	_counterBulider = 0;
 	_filtersName=[];
 	_NewClients=[];
 	_KnownClients=[];
+	_promedioKnow = 0;
+	_promedioNew = 0;
 	_response = [["Fechas","Usuarios Nuevos","Usuarios conocidos"]];
-	search(pRes,pReq,moment(pReq.query['end']),_days,_organization);
+	var _initDate = moment(pReq.query['end']);
+	search(pRes,pReq,_initDate,_days,_organization);
 });
 
 
@@ -221,6 +226,8 @@ var CreateTable = function(pReq,pRes){
 	}
 	else
 	{
+		var _row = ['Promedio de la Semana',(_promedioNew/7),(_promedioKnow/7)];
+		_response.splice(1,0,_row);
 		pRes.send(_response);
 	}
 }
@@ -237,6 +244,8 @@ respuesta.
 -----------------------------------------------------------------------*/
 var Insetar= function(pReq,pRes,cb)
 {
+	_promedioNew = _promedioNew + _NewClients[_counterBulider];
+	_promedioKnow = _promedioKnow + (_KnownClients[_counterBulider]-_NewClients[_counterBulider]);
 	var _row = [_filtersName[_counterBulider],_NewClients[_counterBulider],
 				(_KnownClients[_counterBulider]-_NewClients[_counterBulider])];
 	_response.push(_row);

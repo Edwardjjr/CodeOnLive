@@ -112,6 +112,25 @@ E_App.post('/:org_id/client', function(pReq, pRes) {
 	});
 });
 
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response. 
+
+Decripcion:
+ahira un conteo de login por usuario hasta el dia de hoy.
+-----------------------------------------------------------------------*/
+E_App.post('/:org_id/loginUser', function(pReq, pRes) {
+	try
+	{
+		console.log("llego");
+		I_Logins.UpdateVisit(pReq.params.org_id,pRes);
+	}
+	catch (err)
+	{
+		I_OnLiveLogger('Error in the counter login user: '+ err, 'warn');
+	}
+});
+
 
 /*-----------------------------------------------------------
 -                                                          	-
@@ -248,6 +267,19 @@ En el paramas de request se envia el _id de la organizacion.
 E_App.get('/:org_id/aps', function(pReq, pRes) {
 	I_Aps.ApsByOrg(pReq.params.org_id,pRes);
 });
+
+/*----------------------------------------------------------------------
+Paramteros: pReq: request.
+            pRes: response. 
+
+Decripcion:
+Se retorna un Json de la informacion de los aps de una organizacion. 
+En el paramas de request se envia el _id de la organizacion.
+-----------------------------------------------------------------------*/
+E_App.get('/:org_id/dateInit', function(pReq, pRes) {
+	I_Logins.findLoginsDateByOrg(pReq.params.org_id,pRes);
+});
+
 
 
 

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var moment = require('moment');
-
+var _arrayVenue;
 
 var userSchema = new Schema({
 	
@@ -24,11 +24,36 @@ var userSchema = new Schema({
 		phone:String,
 		client_mac:String,
 		last_time_seen:Date,
-		org_id_OnLive: String
+		org_id_OnLive: String,
+		venues_OnLive: { type : Array}
 });
 
+userSchema.methods.UpdateUser = function UpdateUser(pUser,pIdVenue)
+{
+	_arrayVenue = [];
+	var _flag = true;
+	for (var i = 0, len = this.venues_OnLive.length; i < len; i++) {
+		if(this.venues_OnLive[i]["idVenue"] == pIdVenue)
+		{
+			this.venues_OnLive[i]["count"]= this.venues_OnLive[i]["count"]+1;
+			_arrayVenue.push({"idVenue":this.venues_OnLive[i]["idVenue"],"count":this.venues_OnLive[i]["count"]});
+			_flag = false;
+		}
+		else
+		{
+			_arrayVenue.push({"idVenue":this.venues_OnLive[i]["idVenue"],"count":this.venues_OnLive[i]["count"]});
+		}
+	}
+	if(_flag)
+	{
+		_arrayVenue.push({"idVenue":pIdVenue,"count":1});	
+	}
+	this.venues_OnLive = [];
+	this.save();
+	update(pUser,this);
+}
 
-userSchema.methods.UpdateUser = function UpdateUser(pUser)
+var update = function(pUser,pUserData)
 {
 	if(pUser["birthday"] == null)
 	{
@@ -39,25 +64,31 @@ userSchema.methods.UpdateUser = function UpdateUser(pUser)
 		birthday = moment(pUser["birthday"]); 
 		
 	}
-	this.email=pUser['email'];
-	this.first_name = pUser['first_name'];
-	this.last_name=pUser['last_name'];
-	this.location=pUser['location'];
-	this.location_latitude=pUser['location_latitude'];
-	this.location_longitude=pUser['location_longitude'];
-	this.created_at=moment(pUser['created_at']);
-	this.gender=pUser['gender'];
-	this.city=pUser['city'];
-	this.country=pUser['country'];
-	this.country_code=pUser['country_code'];
-	this.picture=pUser['picture'];
-	this.logins_count=pUser['logins_count'];
-	this.provider=getTanazaLoginProviderName(pUser['provider']);
-	this.birthday=moment(pUser['birthday']);
-	this.phone=pUser['phone'];
-	this.client_mac=pUser['client_mac'];
-	this.last_time_seen=moment(pUser['last_time_seen']);
-	this.save();
+	pUserData.email=pUser['email'];
+	pUserData.first_name = pUser['first_name'];
+	pUserData.last_name=pUser['last_name'];
+	pUserData.location=pUser['location'];
+	pUserData.location_latitude=pUser['location_latitude'];
+	pUserData.location_longitude=pUser['location_longitude'];
+	pUserData.created_at=moment(pUser['created_at']);
+	pUserData.gender=pUser['gender'];
+	pUserData.city=pUser['city'];
+	pUserData.country=pUser['country'];
+	pUserData.country_code=pUser['country_code'];
+	pUserData.picture=pUser['picture'];
+	pUserData.logins_count=pUser['logins_count'];
+	pUserData.provider=getTanazaLoginProviderName(pUser['provider']);
+	pUserData.birthday=birthday;
+	pUserData.phone=pUser['phone'];
+	pUserData.client_mac=pUser['client_mac'];
+	pUserData.last_time_seen=moment(pUser['last_time_seen']);
+	pUserData.venues_OnLive = _arrayVenue;
+	//console.log(pUserData.venues_OnLive);
+	pUserData.save();
+	/*collection.update({id: 1}, {$set : {"doc.array": doc.array}}, function(err,doc){
+          console.log(err);
+    }*/
+	
 }
 userSchema.methods.UpdateUserCsv = function UpdateUser(pUser)
 {
@@ -103,6 +134,7 @@ userSchema.methods.UpdateUserCsv = function UpdateUser(pUser)
 }
 
 
+
 var getTanazaLoginProviderName = function (pProviderId) {
 	switch(pProviderId)
 	{
@@ -135,7 +167,7 @@ var getTanazaLoginProviderName = function (pProviderId) {
 
 // the schema is useless so far
 // we need to create a model using it
-var User = mongoose.model('usersVs', userSchema);
+var User = mongoose.model('usersvs', userSchema);
 
 // make this available to our users in our Node applications
 module.exports = User;

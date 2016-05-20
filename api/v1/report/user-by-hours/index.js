@@ -24,7 +24,7 @@ var _counterHours;
 var _counterHoursDefault;
 var _filtersName = ['12 AM','1 AM','2 AM','3 AM','4 AM','5 AM','6 AM','7 AM','8 AM','9 AM','10 AM','11 AM',
 					'12 PM','1 PM','2 PM','3 PM','4 PM','5 PM','6 PM','7 PM','8 PM','9 PM','10 PM','11 PM','Fuera'];
-var _tittle=["Hora","Semana Actual","Semana Anterior","Promedio 4 Semanas"];
+var _tittle=["Hora","Promedio 4 semanas","3 semanas antes", "2 semanas antes", "1 semana antes", "Semana final"];
 var _counterWeek;
 var _counterBuilder;
 var _response;
@@ -83,8 +83,8 @@ las semanas anteriores.
 -----------------------------------------------------------------------*/
 var searchWeek = function(pReq,pRes)
 {
-	if(pReq.query['pastFourWeek']==ACTIVE)
-	{
+	//if(pReq.query['pastFourWeek']==ACTIVE)
+	//{
 		if(_counterWeek < NUMBER_OF_WEEK)
 		{
 			_counterHours = _counterHoursDefault;
@@ -96,7 +96,7 @@ var searchWeek = function(pReq,pRes)
 			console.log(_arrayResult);
 			CreateTable(pReq,pRes);
 		}
-	}
+	/*}
 	else
 	{
 		if(pReq.query['pastWeek']==ACTIVE)
@@ -117,7 +117,7 @@ var searchWeek = function(pReq,pRes)
 		{
 			CreateTable(pReq,pRes);
 		}
-	}
+	}*/
 }
 
 /*----------------------------------------------------------------------
@@ -142,8 +142,8 @@ var search = function(pReq,pRes)
 	_dateEnd = _dateEnd.subtract(4,'hour');
 	_dateStart =  new Date(_dateStart);
 	_dateEnd = new Date(_dateEnd);
-	console.log("semna aactual:"+_dateStart);
-	console.log("semna aactual:"+_dateEnd)
+	console.log("semna actual:"+_dateStart);
+	console.log("semna actual:"+_dateEnd)
 	if(_counterHours <= _hourEnd)
 	{
 		if(pReq.query['idVenue'] != "null")
@@ -258,20 +258,29 @@ var CreateTable = function(pReq,pRes)
 	}
 	else
 	{
-		var _headLine =[];
+		/*var _headLine =[];
 		_headLine.push(_tittle[0]);
-		_headLine.push(_tittle[1]);
+		_headLine.push(_tittle[4]);
 		if(pReq.query['pastWeek']==ACTIVE)
 		{
+			_headLine.push(_tittle[3]);
+		}
+		if(pReq.query['pastTwoWeek']==ACTIVE)
+		{
 			_headLine.push(_tittle[2]);
+		}
+		if(pReq.query['pastThreeWeek']==ACTIVE)
+		{
+			_headLine.push(_tittle[1]);
 		}
 	
 		if(pReq.query['pastFourWeek']==ACTIVE)
 		{
-			_headLine.push(_tittle[3]);
-		}
+			_headLine.splice(1,0,_tittle[5]);
+		}*/
 		
-		_response.unshift(_headLine);
+		//_response.unshift(_headLine);
+		_response.unshift(_tittle);
 		console.log(_response);
 		pRes.send(_response);
 	}
@@ -292,16 +301,24 @@ var Insetar= function(pReq,pRes,cb)
 {
 	var _row = [_filtersName[_counterBuilder+_initHour]];
 	_row.push(_arrayResult[_counterBuilder]);
-	if(pReq.query['pastWeek']==ACTIVE)
-	{
+	//if(pReq.query['pastWeek']==ACTIVE)
+	//{
 		_row.push(_arrayResult[_counterBuilder+(_numberOfHours+2)]);
-	}
-	if(pReq.query['pastFourWeek']==ACTIVE)
-	{
+	//}
+	//if(pReq.query['pastTwoWeek']==ACTIVE)
+	//{
+		_row.push(_arrayResult[_counterBuilder+2*(_numberOfHours+2)]);
+	//}
+	//if(pReq.query['pastThreeWeek']==ACTIVE)
+	//{
+		_row.push(_arrayResult[_counterBuilder+3*(_numberOfHours+2)]);
+	//}
+	//if(pReq.query['pastFourWeek']==ACTIVE)
+	//{
 		var _averague = (_arrayResult[_counterBuilder]+_arrayResult[_counterBuilder+(_numberOfHours+2)]+
 		_arrayResult[_counterBuilder+2*(_numberOfHours+2)]+_arrayResult[_counterBuilder+3*(_numberOfHours+2)])/NUMBER_OF_WEEK;
-		_row.push(_averague)
-	}
+		_row.splice(1,0,_averague)
+	//}
 
 	_response.push(_row);
 	_counterBuilder++;
