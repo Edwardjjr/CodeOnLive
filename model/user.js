@@ -66,6 +66,7 @@ var update = function(pUser,pUserData)
 		birthday = moment(pUser["birthday"]); 
 		
 	}
+<<<<<<< HEAD
 	pUserData.email=pUser['email'];
 	pUserData.first_name = pUser['first_name'];
 	pUserData.last_name=pUser['last_name'];
@@ -87,6 +88,27 @@ var update = function(pUser,pUserData)
 	pUserData.venues_OnLive = _arrayVenue;
 	pUserData.save();
 	
+=======
+	this.email=pUser['email'];
+	this.first_name = pUser['first_name'];
+	this.last_name=pUser['last_name'];
+	this.location=pUser['location'];
+	this.location_latitude=pUser['location_latitude'];
+	this.location_longitude=pUser['location_longitude'];
+	this.created_at=moment(pUser['created_at']).subtract(6,"hours");
+	this.gender=pUser['gender'];
+	this.city=pUser['city'];
+	this.country=pUser['country'];
+	this.country_code=pUser['country_code'];
+	this.picture=pUser['picture'];
+	this.logins_count=pUser['logins_count'];
+	this.provider=getTanazaLoginProviderName(pUser['provider']);
+	this.birthday=moment(pUser['birthday']);
+	this.phone=pUser['phone'];
+	this.client_mac=pUser['client_mac'];
+	this.last_time_seen=moment(pUser['last_time_seen']).subtract(6,"hours");
+	this.save();
+>>>>>>> 3b4fb25a0e063f7f24d34135e090d3b40c9214ef
 }
 userSchema.methods.UpdateUserCsv = function UpdateUser(pUser)
 {
@@ -116,7 +138,7 @@ userSchema.methods.UpdateUserCsv = function UpdateUser(pUser)
 	this.location=pUser['location'];
 	this.location_latitude=pUser['location_latitude'];
 	this.location_longitude=pUser['location_longitude'];
-	this.created_at=new Date(pUser['registered_at']);
+	this.created_at=moment(pUser['registered_at']).subtract(6,"hours");
 	this.gender=gender;
 	this.city=pUser['city'];
 	this.country=pUser['country'];
@@ -127,7 +149,7 @@ userSchema.methods.UpdateUserCsv = function UpdateUser(pUser)
 	this.birthday=birthday;
 	this.phone=pUser['phone'];
 	this.client_mac=pUser['client_mac'];
-	this.last_time_seen=new Date(pUser['last_login']);
+	this.last_time_seen=moment(pUser['last_login']).subtract(6,"hours");
 	this.save();
 }
 
