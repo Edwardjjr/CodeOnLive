@@ -35,6 +35,7 @@ userSchema.methods.UpdateUser = function UpdateUser(pUser,pIdVenue)
 	for (var i = 0, len = this.venues_OnLive.length; i < len; i++) {
 		if(this.venues_OnLive[i]["idVenue"] == pIdVenue)
 		{
+			console.log("repetido");
 			this.venues_OnLive[i]["count"]= this.venues_OnLive[i]["count"]+1;
 			_arrayVenue.push({"idVenue":this.venues_OnLive[i]["idVenue"],"count":this.venues_OnLive[i]["count"]});
 			_flag = false;
@@ -46,6 +47,7 @@ userSchema.methods.UpdateUser = function UpdateUser(pUser,pIdVenue)
 	}
 	if(_flag)
 	{
+		console.log("nuevo");
 		_arrayVenue.push({"idVenue":pIdVenue,"count":1});	
 	}
 	this.venues_OnLive = [];
@@ -83,11 +85,7 @@ var update = function(pUser,pUserData)
 	pUserData.client_mac=pUser['client_mac'];
 	pUserData.last_time_seen=moment(pUser['last_time_seen']);
 	pUserData.venues_OnLive = _arrayVenue;
-	//console.log(pUserData.venues_OnLive);
 	pUserData.save();
-	/*collection.update({id: 1}, {$set : {"doc.array": doc.array}}, function(err,doc){
-          console.log(err);
-    }*/
 	
 }
 userSchema.methods.UpdateUserCsv = function UpdateUser(pUser)
